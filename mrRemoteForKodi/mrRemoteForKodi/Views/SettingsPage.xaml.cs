@@ -1,8 +1,6 @@
+using mrRemoteForKodi.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-using mrRemoteForKodi.Services;
-
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -21,11 +19,25 @@ namespace mrRemoteForKodi.Views
             set { Set(ref _isLightThemeEnabled, value); }
         }
 
-        private string _appDescription;
-        public string AppDescription
+        private string _appVersion;
+        public string AppVersion
         {
-            get { return _appDescription; }
-            set { Set(ref _appDescription, value); }
+            get { return _appVersion; }
+            set { Set(ref _appVersion, value); }
+        }
+
+        private string _appName;
+        public string AppName
+        {
+            get { return _appName; }
+            set { Set(ref _appName, value); }
+        }
+
+        private string _appDeveloperName;
+        public string AppDeveloperName
+        {
+            get { return _appDeveloperName; }
+            set { Set(ref _appDeveloperName, value); }
         }
 
         public SettingsPage()
@@ -41,16 +53,32 @@ namespace mrRemoteForKodi.Views
         private void Initialize()
         {
             IsLightThemeEnabled = ThemeSelectorService.IsLightThemeEnabled;
-            AppDescription = GetAppDescription();
+            AppVersion = GetAppVersion();
+            AppName = GetAppName();
+            AppDeveloperName = GetDeveloperName();
         }
 
-        private string GetAppDescription()
+        private string GetAppVersion()
         {
             var package = Package.Current;
             var packageId = package.Id;
             var version = packageId.Version;
 
-            return $"{package.DisplayName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        }
+
+        private string GetAppName()
+        {
+            var package = Package.Current;
+
+            return $"{package.DisplayName}";
+        }
+
+        private string GetDeveloperName()
+        {
+            var package = Package.Current;
+
+            return $"{package.PublisherDisplayName}";
         }
 
         private async void ThemeToggle_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)

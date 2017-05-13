@@ -6,64 +6,74 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Margin="12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Row="0"
-                x:Uid="Settings_Title"
-                x:Name="TitlePage"
-                FontSize="28" FontWeight="SemiLight" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"
-                Margin="0,0,12,7"/>   
+    <Grid x:Name="ContentArea" Margin="12,0,12,0">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleRow" Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1" Margin="0,16,0,0">
-                <TextBlock
-                    x:Uid="Settings_Theme"
-                    Style="{ThemeResource TitleTextBlockStyle}"/>
-                <ToggleSwitch
-                    x:Uid="Settings_ThemeToggle"
-                    IsOn="{x:Bind IsLightThemeEnabled, Mode=OneWay}"
-                    Toggled="ThemeToggle_Toggled"
-                    Margin="0,4,0,0">
-                </ToggleSwitch>
-            </StackPanel>
+        <TextBlock
+            x:Name="TitlePage"
+            x:Uid="Settings_Title"
+            Margin="0,0,12,7"
+            VerticalAlignment="Center"
+            FontSize="28"
+            FontWeight="SemiLight"
+            TextTrimming="CharacterEllipsis"
+            TextWrapping="NoWrap" />
 
-            <StackPanel Grid.Row="2" Margin="0,16,0,0">
-                <TextBlock
-                    x:Uid="Settings_About"
-                    Style="{ThemeResource TitleTextBlockStyle}"/>
-                <TextBlock
-                    Text="{x:Bind AppDescription, Mode=OneWay}"
-                    Style="{ThemeResource SubtitleTextBlockStyle}"
-                    Margin="0,4,0,0"/>
-                <TextBlock
-                    x:Uid="Settings_AboutDescription"
-                    Style="{ThemeResource BodyTextBlockStyle}"/>
-                <HyperlinkButton
-                    x:Uid="Settings_PrivacyTermsLink"
-                    Margin="0,8,0,0"/>
-            </StackPanel>
+        <Pivot Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        </Grid>
-    
+            <PivotItem x:Uid="Settings_PivotGeneral">
+                <StackPanel>
+                    <TextBlock x:Uid="Settings_Theme" Style="{ThemeResource TitleTextBlockStyle}" />
+                    <ToggleSwitch
+                        x:Uid="Settings_ThemeToggle"
+                        Margin="0,4,0,0"
+                        IsOn="{x:Bind IsLightThemeEnabled, Mode=OneWay}"
+                        Toggled="ThemeToggle_Toggled" />
+                </StackPanel>
+            </PivotItem>
+
+            <PivotItem x:Uid="Settings_PivotAbout">
+                <StackPanel>
+
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind AppName, Mode=OneWay}" />
+
+                    <TextBlock
+                        Margin="0,8,0,0"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Text="{x:Bind AppDeveloperName, Mode=OneWay}" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Text="{x:Bind AppVersion, Mode=OneWay}" />
+
+                    <HyperlinkButton x:Uid="Settings_PrivacyTermsLink" Margin="0,8,0,0" />
+
+                </StackPanel>
+            </PivotItem>
+
+            <PivotItem x:Uid="Settings_PivotChangelog">
+                <TextBlock Text="Chagelog pivot content" />
+            </PivotItem>
+
+        </Pivot>
+
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640"/>
+                        <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
+                        <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitlePage.Margin" Value="48,0,12,7"/>
+                        <Setter Target="TitlePage.Margin" Value="48,0,12,7" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

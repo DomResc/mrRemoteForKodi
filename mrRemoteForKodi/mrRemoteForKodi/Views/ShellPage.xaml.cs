@@ -1,10 +1,10 @@
+using mrRemoteForKodi.Helpers;
+using mrRemoteForKodi.Services;
+
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-
-using mrRemoteForKodi.Helpers;
-using mrRemoteForKodi.Services;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -69,7 +69,12 @@ namespace mrRemoteForKodi.Views
 
             // More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
             // Edit String/en-US/Resources.resw: Add a menu item title for each page
+
+            // Primary
             _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Document));
+
+            // Secondary
+            _secondaryItems.Add(ShellNavigationItem.FromType<ConfiguredRemotesPage>("Shell_ConfiguredRemotes".GetLocalized(), Symbol.List));
             _secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Shell_Settings".GetLocalized(), Symbol.Setting));
         }
 
@@ -130,6 +135,7 @@ namespace mrRemoteForKodi.Views
             {
                 case PanoramicStateName:
                     DisplayMode = SplitViewDisplayMode.CompactInline;
+                    IsPaneOpen = true;
                     break;
                 case WideStateName:
                     DisplayMode = SplitViewDisplayMode.CompactInline;

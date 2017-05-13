@@ -5,43 +5,44 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid
-        x:Name="ContentArea"
-        Margin="12,0,12,0">
 
+    <Grid x:Name="ContentArea" Margin="12,0,12,0">
         <Grid.RowDefinitions>
-            <RowDefinition x:Name="TitleRow" Height="48"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="TitleRow" Height="48" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock
             x:Name="TitlePage"
             x:Uid="Main_Title"
-            Text="Navigation Item 2"
-            FontSize="28" FontWeight="SemiLight" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center"
-            Margin="0,0,12,7"/>
+            Margin="0,0,12,7"
+            VerticalAlignment="Center"
+            FontSize="28"
+            FontWeight="SemiLight"
+            TextTrimming="CharacterEllipsis"
+            TextWrapping="NoWrap" />
 
-        <Grid 
-            Grid.Row="1" 
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.-->
+        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <!--
+                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content.
+                Place your content here.
+            -->
         </Grid>
-    
+
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640"/>
+                        <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
+                        <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitlePage.Margin" Value="48,0,12,7"/>
+                        <Setter Target="TitlePage.Margin" Value="48,0,12,7" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

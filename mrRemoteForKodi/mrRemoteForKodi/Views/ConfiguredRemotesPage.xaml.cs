@@ -1,12 +1,12 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Controls;
 
 namespace mrRemoteForKodi.Views
 {
-    public sealed partial class MainPage : Page, INotifyPropertyChanged
+    public sealed partial class ConfiguredRemotesPage : Page, INotifyPropertyChanged
     {
-        public MainPage()
+        public ConfiguredRemotesPage()
         {
             InitializeComponent();
         }
