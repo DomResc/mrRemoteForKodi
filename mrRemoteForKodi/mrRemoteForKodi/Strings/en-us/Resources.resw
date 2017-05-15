@@ -132,12 +132,6 @@
   <data name="Settings_ThemeToggle.OffContent" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Terms</value>
-  </data>
-  <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
-  </data>
   <data name="Shell_Main" xml:space="preserve">
     <value>Remote</value>
   </data>
@@ -164,5 +158,44 @@
   </data>
   <data name="Settings_VibrateToggle.OnContent" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="Settings_BugsOrSuggestions.Text" xml:space="preserve">
+    <value>Bugs or Suggestions</value>
+  </data>
+  <data name="Settings_BugsOrSuggestionsLink.Content" xml:space="preserve">
+    <value>Send me bugs, feature requests, and more</value>
+  </data>
+  <data name="Settings_BugsOrSuggestionsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/domresc/mrRemoteForKodi/issues</value>
+  </data>
+  <data name="Settings_Contacts.Text" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Settings_EmailLink.Content" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Settings_EmailLink.NavigateUri" xml:space="preserve">
+    <value>mailto:domenico.rescigno@gmail.com</value>
+  </data>
+  <data name="Settings_GitHubLink.Content" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Settings_GitHubLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/domresc/mrRemoteForKodi</value>
+  </data>
+  <data name="Settings_RateMe.Text" xml:space="preserve">
+    <value>RateMe</value>
+  </data>
+  <data name="Settings_RateMeLink.Content" xml:space="preserve">
+    <value>Rate and Review</value>
+  </data>
+  <data name="Settings_RateMeLink.NavigateUri" xml:space="preserve">
+    <value>ms-windows-store://review/?ProductId=9nblggh4qvkx</value>
+  </data>
+  <data name="Settings_WebsiteLink.Content" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="Settings_WebsiteLink.NavigateUri" xml:space="preserve">
+    <value>https://domenicorescigno.wordpress.com</value>
   </data>
 </root>

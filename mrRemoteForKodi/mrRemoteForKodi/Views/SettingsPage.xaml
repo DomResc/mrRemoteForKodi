@@ -47,10 +47,9 @@
             <PivotItem x:Uid="Settings_PivotAbout">
                 <StackPanel>
 
-                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind AppName, Mode=OneWay}" />
-
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind AppName, Mode=OneWay}" />
                     <TextBlock
-                        Margin="0,8,0,0"
+                        Margin="0,4,0,0"
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{x:Bind AppDeveloperName, Mode=OneWay}" />
                     <TextBlock
@@ -58,15 +57,27 @@
                         Style="{ThemeResource BodyTextBlockStyle}"
                         Text="{x:Bind AppVersion, Mode=OneWay}" />
 
-                    <HyperlinkButton x:Uid="Settings_PrivacyTermsLink" Margin="0,8,0,0" />
+                    <TextBlock
+                        x:Uid="Settings_Contacts"
+                        Margin="0,16,0,0"
+                        Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <HyperlinkButton x:Uid="Settings_WebsiteLink" Margin="0,4,0,0" />
+                    <HyperlinkButton x:Uid="Settings_EmailLink" Margin="0,4,0,0" />
+                    <HyperlinkButton x:Uid="Settings_GitHubLink" Margin="0,4,0,0" />
 
+                    <TextBlock
+                        x:Uid="Settings_RateMe"
+                        Margin="0,16,0,0"
+                        Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <HyperlinkButton x:Uid="Settings_RateMeLink" Margin="0,4,0,0" />
+
+                    <TextBlock
+                        x:Uid="Settings_BugsOrSuggestions"
+                        Margin="0,16,0,0"
+                        Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <HyperlinkButton x:Uid="Settings_BugsOrSuggestionsLink" Margin="0,4,0,0" />
                 </StackPanel>
             </PivotItem>
-
-            <PivotItem x:Uid="Settings_PivotChangelog">
-                <TextBlock Text="Chagelog pivot content" />
-            </PivotItem>
-
         </Pivot>
 
         <!--  Adaptive triggers  -->

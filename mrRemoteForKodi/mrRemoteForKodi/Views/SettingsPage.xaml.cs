@@ -14,8 +14,7 @@ namespace mrRemoteForKodi.Views
 {
     public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     {
-        // TODO UWPTemplates: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
-        // TODO UWPTemplates: Setup your privacy web in your Resource File, currently set to https://YourPrivacyUrlGoesHere
+        // Add other settings as necessary. See https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
 
         private bool _isLightThemeEnabled;
         public bool IsLightThemeEnabled
