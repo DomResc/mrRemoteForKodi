@@ -1,7 +1,12 @@
+using mrRemoteForKodi.Helpers;
 using mrRemoteForKodi.Services;
+
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
 using Windows.ApplicationModel;
+using Windows.Storage;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -17,6 +22,13 @@ namespace mrRemoteForKodi.Views
         {
             get { return _isLightThemeEnabled; }
             set { Set(ref _isLightThemeEnabled, value); }
+        }
+
+        private bool _isVibrateEnabled;
+        public bool IsVibrateEnabled
+        {
+            get { return _isVibrateEnabled; }
+            set { Set(ref _isVibrateEnabled, value); }
         }
 
         private string _appVersion;
@@ -47,12 +59,13 @@ namespace mrRemoteForKodi.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Initialize();
+            InitializeAsync();
         }
 
-        private void Initialize()
+        private async void InitializeAsync()
         {
             IsLightThemeEnabled = ThemeSelectorService.IsLightThemeEnabled;
+            IsVibrateEnabled = await ApplicationData.Current.LocalSettings.ReadAsync<bool>(nameof(IsVibrateEnabled));
             AppVersion = GetAppVersion();
             AppName = GetAppName();
             AppDeveloperName = GetDeveloperName();
@@ -81,18 +94,30 @@ namespace mrRemoteForKodi.Views
             return $"{package.PublisherDisplayName}";
         }
 
-        private async void ThemeToggle_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void ThemeToggle_Toggled(object sender, RoutedEventArgs e)
         {
             //Only switch theme if value has changed (not on initialization)
             var toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)
             {
                 if (toggleSwitch.IsOn != ThemeSelectorService.IsLightThemeEnabled)
-                {
                     await ThemeSelectorService.SwitchThemeAsync();
-                }
             }
         }
+
+        private async void VibrateToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            //Only switch vibrate if value has changed (not on initialization)
+            var toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn)
+                    await ApplicationData.Current.LocalSettings.SaveAsync(nameof(IsVibrateEnabled), true);
+                else
+                    await ApplicationData.Current.LocalSettings.SaveAsync(nameof(IsVibrateEnabled), false);
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

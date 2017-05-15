@@ -156,4 +156,13 @@
   <data name="Settings_PivotGeneral.Header" xml:space="preserve">
     <value>General</value>
   </data>
+  <data name="Settings_Vibrate.Text" xml:space="preserve">
+    <value>Vibrate on button press</value>
+  </data>
+  <data name="Settings_VibrateToggle.OffContent" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Settings_VibrateToggle.OnContent" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>
