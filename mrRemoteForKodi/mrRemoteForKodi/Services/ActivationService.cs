@@ -1,9 +1,9 @@
+using mrRemoteForKodi.Activation;
+
 using System;
 using System.Collections.Generic;
-using System.Linq;  
+using System.Linq;
 using System.Threading.Tasks;
-
-using mrRemoteForKodi.Activation;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -33,7 +33,7 @@ namespace mrRemoteForKodi.Services
             {
                 // Initialize things like registering background task before the app is loaded
                 await InitializeAsync();
-                
+
                 // Do not repeat app initialization when the Window already has content,
                 // just ensure that the window is active
                 if (Window.Current.Content == null)
@@ -84,7 +84,7 @@ namespace mrRemoteForKodi.Services
 
         private async Task StartupAsync()
         {
-            Services.ThemeSelectorService.SetRequestedTheme();
+            ThemeSelectorService.SetRequestedTheme();
             await Task.CompletedTask;
         }
 
@@ -101,7 +101,7 @@ namespace mrRemoteForKodi.Services
 
         private void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = (NavigationService.CanGoBack) ? 
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = (NavigationService.CanGoBack) ?
                 AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 

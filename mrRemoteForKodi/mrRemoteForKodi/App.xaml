@@ -5,7 +5,6 @@
     RequestedTheme="Light">
 
     <Application.Resources>
-        <ResourceDictionary>
-        </ResourceDictionary>
+        <ResourceDictionary />
     </Application.Resources>
 </Application>

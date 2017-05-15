@@ -68,7 +68,6 @@ namespace mrRemoteForKodi.Views
             _secondaryItems.Clear();
 
             // More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
-            // Edit String/en-US/Resources.resw: Add a menu item title for each page
 
             // Primary
             _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Document));
@@ -147,7 +146,7 @@ namespace mrRemoteForKodi.Views
                     break;
                 default:
                     break;
-            }            
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,6 +1,6 @@
-using System;
-
 using mrRemoteForKodi.Services;
+
+using System;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -36,7 +36,7 @@ namespace mrRemoteForKodi
         {
             if (!e.PrelaunchActivated)
             {
-                await ActivationService.ActivateAsync(e); 
+                await ActivationService.ActivateAsync(e);
             }
         }
 
@@ -48,7 +48,7 @@ namespace mrRemoteForKodi
         {
             await ActivationService.ActivateAsync(args);
         }
-            
+
         private ActivationService CreateActivationService()
         {
             return new ActivationService(this, typeof(Views.MainPage), new Views.ShellPage());

@@ -1,7 +1,7 @@
+using mrRemoteForKodi.Helpers;
+
 using System;
 using System.Threading.Tasks;
-
-using mrRemoteForKodi.Helpers;
 
 using Windows.Storage;
 using Windows.UI.Xaml;
