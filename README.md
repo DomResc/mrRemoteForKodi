@@ -8,3 +8,5 @@ Included features:
 - Simply add a mediacenter using the wizard
 - Wake up your mediacenter with Wake-on-Lan
 - Play and Cast from your Kodi mediacenter
+
+[![Download](https://assets.windowsphone.com/d86ab9b4-2f3d-4a94-92f8-1598073e7343/English_Get_it_Win_10_InvariantCulture_Default.png)](https://www.microsoft.com/store/apps/9nblggh4qvkx?ocid=badge)
