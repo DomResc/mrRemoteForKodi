@@ -70,7 +70,7 @@ namespace mrRemoteForKodi.Views
             // More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
 
             // Primary
-            _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Document));
+            _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Remote));
 
             // Secondary
             _secondaryItems.Add(ShellNavigationItem.FromType<ConfiguredRemotesPage>("Shell_ConfiguredRemotes".GetLocalized(), Symbol.List));
