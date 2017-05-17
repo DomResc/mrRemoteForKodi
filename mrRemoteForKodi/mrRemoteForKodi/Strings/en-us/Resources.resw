@@ -198,4 +198,10 @@
   <data name="Settings_WebsiteLink.NavigateUri" xml:space="preserve">
     <value>https://domenicorescigno.wordpress.com</value>
   </data>
+  <data name="ConfiguredRemotes_Title.Text" xml:space="preserve">
+    <value>Configured remotes</value>
+  </data>
+  <data name="ConfiguredRemotes_TextBlockEmpty.Text" xml:space="preserve">
+    <value>There are no configured remotes. You can configure remotes by clicking on Add a remote button below.</value>
+  </data>
 </root>

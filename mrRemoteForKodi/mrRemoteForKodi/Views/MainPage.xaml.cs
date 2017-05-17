@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Windows.UI.Xaml.Controls;
 
 namespace mrRemoteForKodi.Views

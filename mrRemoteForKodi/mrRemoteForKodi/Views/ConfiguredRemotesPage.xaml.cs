@@ -1,14 +1,39 @@
-﻿using System.ComponentModel;
+﻿using mrRemoteForKodi.Helpers;
+using mrRemoteForKodi.Models;
+
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace mrRemoteForKodi.Views
 {
     public sealed partial class ConfiguredRemotesPage : Page, INotifyPropertyChanged
     {
+        private bool IsTextBlockEmptyVisible;
+
         public ConfiguredRemotesPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            InitializeAsync();
+        }
+
+        private async void InitializeAsync()
+        {
+            var remotes = await ApplicationData.Current.LocalFolder.ReadAsync<List<Remote>>("RemotesList");
+            
+            if (remotes?.Any() ?? false)
+                IsTextBlockEmptyVisible = false;
+            else
+                IsTextBlockEmptyVisible = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

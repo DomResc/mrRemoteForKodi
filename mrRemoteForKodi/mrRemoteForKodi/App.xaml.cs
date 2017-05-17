@@ -1,8 +1,14 @@
+using mrRemoteForKodi.Helpers;
+using mrRemoteForKodi.Models;
 using mrRemoteForKodi.Services;
+using mrRemoteForKodi.Views;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace mrRemoteForKodi
@@ -51,7 +57,22 @@ namespace mrRemoteForKodi
 
         private ActivationService CreateActivationService()
         {
-            return new ActivationService(this, typeof(Views.MainPage), new Views.ShellPage());
+            if (!IsConfiguredRemotesEmpty())
+                return new ActivationService(this, typeof(MainPage), new ShellPage());
+            else
+                return new ActivationService(this, typeof(ConfiguredRemotesPage), new ShellPage());
+        }
+
+        private bool IsConfiguredRemotesEmpty()
+        {
+            var remotesTask = ApplicationData.Current.LocalFolder.ReadAsync<List<Remote>>("RemotesList");
+
+            var remotes = remotesTask.Result;
+
+            if (remotes?.Any() ?? false)
+                return false;
+            else
+                return true;
         }
     }
 }
