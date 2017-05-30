@@ -157,7 +157,11 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
     <Compile Include="Helpers\Singleton.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="mrRemoteForKodi_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />

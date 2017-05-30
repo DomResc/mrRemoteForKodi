@@ -204,4 +204,10 @@
   <data name="ConfiguredRemotes_TextBlockEmpty.Text" xml:space="preserve">
     <value>There are no configured remotes. You can configure remotes by clicking on Add a remote button below.</value>
   </data>
+  <data name="ConfiguredRemotes_AppBarButtonAddARemote.Label" xml:space="preserve">
+    <value>Add a Remote</value>
+  </data>
+  <data name="ConfiguredRemotes_TextBlockAddHelp.Text" xml:space="preserve">
+    <value>Make sure that your Kodi / XMBC is running and it is configured correcly. Insert your Kodi / XBMC configuration below, or use the Search button to automatically search for configured Kodi/XBMC.</value>
+  </data>
 </root>

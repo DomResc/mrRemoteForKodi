@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
 namespace mrRemoteForKodi
@@ -57,12 +59,15 @@ namespace mrRemoteForKodi
 
         private ActivationService CreateActivationService()
         {
+            StatusBarSettingsAsync();
+
             if (!IsConfiguredRemotesEmpty())
                 return new ActivationService(this, typeof(MainPage), new ShellPage());
             else
                 return new ActivationService(this, typeof(ConfiguredRemotesPage), new ShellPage());
         }
 
+        // Check if there is remote in applicationdata
         private bool IsConfiguredRemotesEmpty()
         {
             var remotesTask = ApplicationData.Current.LocalFolder.ReadAsync<List<Remote>>("RemotesList");
@@ -73,6 +78,19 @@ namespace mrRemoteForKodi
                 return false;
             else
                 return true;
+        }
+
+        // Disable statusbar on mobile
+        private async void StatusBarSettingsAsync()
+        {
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    await statusBar.HideAsync();
+                }
+            }
         }
     }
 }

@@ -6,10 +6,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Flyout x:Key="AddRemoteFlyout" Placement="Full">
+            <StackPanel>
+                <TextBlock x:Uid="ConfiguredRemotes_TextBlockAddHelp" />
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+
     <Grid x:Name="ContentArea" Margin="12,0,12,0">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="TitleRow" Height="48" />
             <RowDefinition Height="*" />
+            <RowDefinition x:Name="CommandRow" Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -42,6 +51,21 @@
             </RelativePanel>
 
         </Grid>
+
+        <RelativePanel Grid.Row="2" Margin="-12,0,-12,0">
+
+            <CommandBar
+                Background="Transparent"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+
+                <AppBarButton
+                    x:Uid="ConfiguredRemotes_AppBarButtonAddARemote"
+                    Flyout="{StaticResource AddRemoteFlyout}"
+                    Icon="Add" />
+            </CommandBar>
+
+        </RelativePanel>
 
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
