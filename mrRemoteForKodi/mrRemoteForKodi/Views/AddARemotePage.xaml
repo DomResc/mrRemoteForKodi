@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="mrRemoteForKodi.Views.ConfiguredRemotesPage"
+    x:Class="mrRemoteForKodi.Views.AddARemotePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,12 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition x:Name="TitleRow" Height="48" />
             <RowDefinition Height="*" />
-            <RowDefinition x:Name="CommandRow" Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
             x:Name="TitlePage"
-            x:Uid="ConfiguredRemotes_Title"
+            x:Uid="AddARemote_Title"
             Margin="0,0,12,7"
             VerticalAlignment="Center"
             FontSize="28"
@@ -25,39 +24,9 @@
 
         <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-            <RelativePanel MaxWidth="250" Visibility="{x:Bind IsTextBlockEmptyVisible, Mode=OneWay}">
-                <TextBlock
-                    FontFamily="Segoe MDL2 Assets"
-                    RelativePanel.Above="TextBlockEmpty"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    Style="{ThemeResource TitleTextBlockStyle}"
-                    Text="&#xE783;" />
-
-                <TextBlock
-                    x:Name="TextBlockEmpty"
-                    x:Uid="ConfiguredRemotes_TextBlockEmpty"
-                    Margin="0,8,0,0"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    RelativePanel.AlignVerticalCenterWithPanel="True"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-            </RelativePanel>
+            <!--  Page content  -->
 
         </Grid>
-
-        <RelativePanel Grid.Row="2" Margin="-12,0,-12,0">
-
-            <CommandBar
-                Background="Transparent"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True">
-
-                <AppBarButton
-                    x:Uid="ConfiguredRemotes_AppBarButtonAddARemote"
-                    Click="AppBarButtonAddARemote_Click"
-                    Icon="Add" />
-            </CommandBar>
-
-        </RelativePanel>
 
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>

@@ -125,6 +125,9 @@
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
+    <Compile Include="Views\AddARemotePage.xaml.cs">
+      <DependentUpon>AddARemotePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConfiguredRemotesPage.xaml.cs">
       <DependentUpon>ConfiguredRemotesPage.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddARemotePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConfiguredRemotesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

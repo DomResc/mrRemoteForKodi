@@ -1,12 +1,13 @@
 ﻿using mrRemoteForKodi.Helpers;
 using mrRemoteForKodi.Models;
-
+using mrRemoteForKodi.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Windows.Storage;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -34,6 +35,11 @@ namespace mrRemoteForKodi.Views
                 IsTextBlockEmptyVisible = false;
             else
                 IsTextBlockEmptyVisible = true;
+        }
+
+        private void AppBarButtonAddARemote_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(typeof(AddARemotePage));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

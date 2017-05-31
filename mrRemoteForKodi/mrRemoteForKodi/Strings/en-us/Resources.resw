@@ -139,7 +139,7 @@
     <value>Settings</value>
   </data>
   <data name="Shell_ConfiguredRemotes" xml:space="preserve">
-    <value>Configured Remotes</value>
+    <value>Configured remotes</value>
   </data>
   <data name="Settings_PivotAbout.Header" xml:space="preserve">
     <value>About</value>
@@ -207,7 +207,7 @@
   <data name="ConfiguredRemotes_AppBarButtonAddARemote.Label" xml:space="preserve">
     <value>Add a Remote</value>
   </data>
-  <data name="ConfiguredRemotes_TextBlockAddHelp.Text" xml:space="preserve">
-    <value>Make sure that your Kodi / XMBC is running and it is configured correcly. Insert your Kodi / XBMC configuration below, or use the Search button to automatically search for configured Kodi/XBMC.</value>
+  <data name="AddARemote_Title.Text" xml:space="preserve">
+    <value>Add a remote</value>
   </data>
 </root>
