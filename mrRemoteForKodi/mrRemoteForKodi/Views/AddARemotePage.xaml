@@ -22,11 +22,65 @@
             TextTrimming="CharacterEllipsis"
             TextWrapping="NoWrap" />
 
-        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <RelativePanel Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-            <!--  Page content  -->
+            <TextBlock x:Name="TextBlockHelp" TextWrapping="WrapWholeWords">
+                <Run x:Uid="AddARemote_TextBlock" />
+                <LineBreak />
+                <LineBreak />
+                <Run x:Uid="AddARemote_TextBlockHelp" />
+                <Hyperlink Click="HyperlinkHelp_Click">
+                    <Run x:Uid="AddARemote_TextBlockLink" />
+                </Hyperlink>
+                <Run Text="." />
 
-        </Grid>
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout x:Name="FlyoutHelp" Placement="Bottom">
+                        <TextBlock Width="320" TextWrapping="WrapWholeWords">
+                            <Run
+                                x:Uid="AddARemote_FlyoutTitleKodi"
+                                FontWeight="Bold"
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                            <LineBreak />
+                            <Run x:Uid="AddARemote_FlyoutHelpKodi" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run
+                                x:Uid="AddARemote_FlyoutTitleZeroconf"
+                                FontWeight="Bold"
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                            <LineBreak />
+                            <Run x:Uid="AddARemote_FlyoutHelpZeroconf" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run
+                                x:Uid="AddARemote_FlyoutTitleNetwork"
+                                FontWeight="Bold"
+                                Foreground="{ThemeResource SystemAccentColor}" />
+                            <LineBreak />
+                            <Run x:Uid="AddARemote_FlyoutHelpNetwork" />
+                        </TextBlock>
+
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </TextBlock>
+
+            <Button
+                x:Uid="AddARemote_ButtonBack"
+                MinWidth="128"
+                Margin="0,0,0,12"
+                Click="ButtonBack_Click"
+                RelativePanel.AlignBottomWithPanel="True" />
+
+            <Button
+                x:Uid="AddARemote_ButtonSearch"
+                MinWidth="128"
+                Margin="0,0,0,12"
+                Background="{ThemeResource SystemAccentColor}"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True" />
+
+        </RelativePanel>
 
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>

@@ -210,4 +210,46 @@
   <data name="AddARemote_Title.Text" xml:space="preserve">
     <value>Add a remote</value>
   </data>
+  <data name="AddARemote_TextBlock.Text" xml:space="preserve">
+    <value>Make sure that your Kodi/XBMC is running, properly configured, and on the same network as your device.</value>
+  </data>
+  <data name="AddARemote_ButtonBack.Content" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="AddARemote_ButtonSearch.Content" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="AddARemote_FlyoutHelpKodi.Text" xml:space="preserve">
+    <value>In Kodi/XBMC:
+1. Go to System-&gt;Settings-&gt;Services-&gt;Web server and enable Allow remote control via HTTP.
+2. Take note of Port, Username, Password because you have to put them in mrRemote.
+3. Go to System-&gt;Settings-&gt;Services-&gt;Remote control and enable Allow remote control by programs on this system and Allow remote control by programs on other systems.</value>
+  </data>
+  <data name="AddARemote_FlyoutTitleKodi.Text" xml:space="preserve">
+    <value>How-To configure Kodi/XBMC</value>
+  </data>
+  <data name="AddARemote_FlyoutTitleNetwork.Text" xml:space="preserve">
+    <value>Get Kodi/XBMC network information</value>
+  </data>
+  <data name="AddARemote_FlyoutHelpNetwork.Text" xml:space="preserve">
+    <value>If mrRemote isn't able to automatically find your mediacenter, you have to insert manually network information. To get this information in Kodi/XBMC:
+1. Go to System-&gt;System info and take note of the IP address.</value>
+  </data>
+  <data name="AddARemote_FlyoutTitleZeroconf.Text" xml:space="preserve">
+    <value>How-To enable automatic configuration (Zeroconf)</value>
+  </data>
+  <data name="AddARemote_FlyoutHelpZeroconf.Text" xml:space="preserve">
+    <value>Install Zeroconf:
+1. Windows, you need Apple's Bonjour. If you have Itunes, you have it already installed. Otherwise install it. 
+2. Linux, you need to install avahi.
+
+Enable Zeroconf in Kodi/XBMC
+1. Go to System-&gt;Settings-&gt;Services-&gt;Zeroconf and enable Announce services to other systems.</value>
+  </data>
+  <data name="AddARemote_TextBlockHelp.Text" xml:space="preserve">
+    <value>You can find help with the configuration</value>
+  </data>
+  <data name="AddARemote_TextBlockLink.Text" xml:space="preserve">
+    <value>here</value>
+  </data>
 </root>
