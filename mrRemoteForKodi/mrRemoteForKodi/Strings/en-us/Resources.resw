@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Main_Title.Text" xml:space="preserve">
+  <data name="Main_TextBlockTitle.Text" xml:space="preserve">
     <value>Remote</value>
   </data>
-  <data name="Settings_Title.Text" xml:space="preserve">
+  <data name="Settings_TextBlockTitle.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
+  <data name="Settings_TextBlockTheme.Text" xml:space="preserve">
     <value>Theme</value>
   </data>
-  <data name="Settings_ThemeToggle.OnContent" xml:space="preserve">
+  <data name="Settings_ToggleSwitchTheme.OnContent" xml:space="preserve">
     <value>Light</value>
   </data>
-  <data name="Settings_ThemeToggle.OffContent" xml:space="preserve">
+  <data name="Settings_ToggleSwitchTheme.OffContent" xml:space="preserve">
     <value>Dark</value>
   </data>
   <data name="Shell_Main" xml:space="preserve">
@@ -141,76 +141,73 @@
   <data name="Shell_ConfiguredRemotes" xml:space="preserve">
     <value>Configured remotes</value>
   </data>
-  <data name="Settings_PivotAbout.Header" xml:space="preserve">
+  <data name="Settings_PivotItemAbout.Header" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="Settings_PivotChangelog.Header" xml:space="preserve">
-    <value>Changelog</value>
-  </data>
-  <data name="Settings_PivotGeneral.Header" xml:space="preserve">
+  <data name="Settings_PivotItemGeneral.Header" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="Settings_Vibrate.Text" xml:space="preserve">
+  <data name="Settings_TextBlockVibrate.Text" xml:space="preserve">
     <value>Vibrate on button press</value>
   </data>
-  <data name="Settings_VibrateToggle.OffContent" xml:space="preserve">
+  <data name="Settings_ToggleSwitchVibrate.OffContent" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Settings_VibrateToggle.OnContent" xml:space="preserve">
+  <data name="Settings_ToggleSwitchVibrate.OnContent" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="Settings_BugsOrSuggestions.Text" xml:space="preserve">
+  <data name="Settings_TextBlockBugsOrSuggestions.Text" xml:space="preserve">
     <value>Bugs or Suggestions</value>
   </data>
-  <data name="Settings_BugsOrSuggestionsLink.Content" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonBugsOrSuggestions.Content" xml:space="preserve">
     <value>Send me bugs, feature requests, and more</value>
   </data>
-  <data name="Settings_BugsOrSuggestionsLink.NavigateUri" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonBugsOrSuggestions.NavigateUri" xml:space="preserve">
     <value>https://github.com/domresc/mrRemoteForKodi/issues</value>
   </data>
-  <data name="Settings_Contacts.Text" xml:space="preserve">
+  <data name="Settings_TextBlockContacts.Text" xml:space="preserve">
     <value>Contacts</value>
   </data>
-  <data name="Settings_EmailLink.Content" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonEmail.Content" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="Settings_EmailLink.NavigateUri" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonEmail.NavigateUri" xml:space="preserve">
     <value>mailto:domenico.rescigno@gmail.com</value>
   </data>
-  <data name="Settings_GitHubLink.Content" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonGitHub.Content" xml:space="preserve">
     <value>GitHub</value>
   </data>
-  <data name="Settings_GitHubLink.NavigateUri" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonGitHub.NavigateUri" xml:space="preserve">
     <value>https://github.com/domresc/mrRemoteForKodi</value>
   </data>
-  <data name="Settings_RateMe.Text" xml:space="preserve">
+  <data name="Settings_TextBlockRateMe.Text" xml:space="preserve">
     <value>RateMe</value>
   </data>
-  <data name="Settings_RateMeLink.Content" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonRateMe.Content" xml:space="preserve">
     <value>Rate and Review</value>
   </data>
-  <data name="Settings_RateMeLink.NavigateUri" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonRateMe.NavigateUri" xml:space="preserve">
     <value>ms-windows-store://review/?ProductId=9nblggh4qvkx</value>
   </data>
-  <data name="Settings_WebsiteLink.Content" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonWebsite.Content" xml:space="preserve">
     <value>Website</value>
   </data>
-  <data name="Settings_WebsiteLink.NavigateUri" xml:space="preserve">
+  <data name="Settings_HyperlinkButtonWebsite.NavigateUri" xml:space="preserve">
     <value>https://domenicorescigno.wordpress.com</value>
   </data>
-  <data name="ConfiguredRemotes_Title.Text" xml:space="preserve">
+  <data name="ConfiguredRemotes_TextBlockTitle.Text" xml:space="preserve">
     <value>Configured remotes</value>
   </data>
-  <data name="ConfiguredRemotes_TextBlockEmpty.Text" xml:space="preserve">
+  <data name="ConfiguredRemotes_TextBlockEmptyList.Text" xml:space="preserve">
     <value>There are no configured remotes. You can configure remotes by clicking on Add a remote button below.</value>
   </data>
   <data name="ConfiguredRemotes_AppBarButtonAddARemote.Label" xml:space="preserve">
     <value>Add a Remote</value>
   </data>
-  <data name="AddARemote_Title.Text" xml:space="preserve">
+  <data name="AddARemote_TextBlockTitle.Text" xml:space="preserve">
     <value>Add a remote</value>
   </data>
-  <data name="AddARemote_TextBlock.Text" xml:space="preserve">
+  <data name="AddARemote_TextBlockHelp_1.Text" xml:space="preserve">
     <value>Make sure that your Kodi/XBMC is running, properly configured, and on the same network as your device.</value>
   </data>
   <data name="AddARemote_ButtonBack.Content" xml:space="preserve">
@@ -219,26 +216,26 @@
   <data name="AddARemote_ButtonSearch.Content" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="AddARemote_FlyoutHelpKodi.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelp_1.Text" xml:space="preserve">
     <value>In Kodi/XBMC:
 1. Go to System-&gt;Settings-&gt;Services-&gt;Web server and enable Allow remote control via HTTP.
 2. Take note of Port, Username, Password because you have to put them in mrRemote.
 3. Go to System-&gt;Settings-&gt;Services-&gt;Remote control and enable Allow remote control by programs on this system and Allow remote control by programs on other systems.</value>
   </data>
-  <data name="AddARemote_FlyoutTitleKodi.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelpTitle_1.Text" xml:space="preserve">
     <value>How-To configure Kodi/XBMC</value>
   </data>
-  <data name="AddARemote_FlyoutTitleNetwork.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelpTitle_3.Text" xml:space="preserve">
     <value>Get Kodi/XBMC network information</value>
   </data>
-  <data name="AddARemote_FlyoutHelpNetwork.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelp_3.Text" xml:space="preserve">
     <value>If mrRemote isn't able to automatically find your mediacenter, you have to insert manually network information. To get this information in Kodi/XBMC:
 1. Go to System-&gt;System info and take note of the IP address.</value>
   </data>
-  <data name="AddARemote_FlyoutTitleZeroconf.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelpTitle_2.Text" xml:space="preserve">
     <value>How-To enable automatic configuration (Zeroconf)</value>
   </data>
-  <data name="AddARemote_FlyoutHelpZeroconf.Text" xml:space="preserve">
+  <data name="AddARemote_FlyoutHelp_2.Text" xml:space="preserve">
     <value>Install Zeroconf:
 1. Windows, you need Apple's Bonjour. If you have Itunes, you have it already installed. Otherwise install it. 
 2. Linux, you need to install avahi.
@@ -246,10 +243,10 @@
 Enable Zeroconf in Kodi/XBMC
 1. Go to System-&gt;Settings-&gt;Services-&gt;Zeroconf and enable Announce services to other systems.</value>
   </data>
-  <data name="AddARemote_TextBlockHelp.Text" xml:space="preserve">
+  <data name="AddARemote_TextBlockHelp_2.Text" xml:space="preserve">
     <value>You can find help with the configuration</value>
   </data>
-  <data name="AddARemote_TextBlockLink.Text" xml:space="preserve">
+  <data name="AddARemote_TextBlockHelp_3.Text" xml:space="preserve">
     <value>here</value>
   </data>
 </root>

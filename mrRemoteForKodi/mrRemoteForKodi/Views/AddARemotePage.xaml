@@ -6,15 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea" Margin="12,0,12,0">
+    <Grid Margin="12,0,12,0">
         <Grid.RowDefinitions>
-            <RowDefinition x:Name="TitleRow" Height="48" />
+            <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock
-            x:Name="TitlePage"
-            x:Uid="AddARemote_Title"
+            x:Name="TextBlockTitle"
+            x:Uid="AddARemote_TextBlockTitle"
             Margin="0,0,12,7"
             VerticalAlignment="Center"
             FontSize="28"
@@ -25,12 +25,12 @@
         <RelativePanel Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
             <TextBlock x:Name="TextBlockHelp" TextWrapping="WrapWholeWords">
-                <Run x:Uid="AddARemote_TextBlock" />
+                <Run x:Uid="AddARemote_TextBlockHelp_1" />
                 <LineBreak />
                 <LineBreak />
-                <Run x:Uid="AddARemote_TextBlockHelp" />
+                <Run x:Uid="AddARemote_TextBlockHelp_2" />
                 <Hyperlink Click="HyperlinkHelp_Click">
-                    <Run x:Uid="AddARemote_TextBlockLink" />
+                    <Run x:Uid="AddARemote_TextBlockHelp_3" />
                 </Hyperlink>
                 <Run Text="." />
 
@@ -38,27 +38,27 @@
                     <Flyout x:Name="FlyoutHelp" Placement="Bottom">
                         <TextBlock Width="320" TextWrapping="WrapWholeWords">
                             <Run
-                                x:Uid="AddARemote_FlyoutTitleKodi"
+                                x:Uid="AddARemote_FlyoutHelpTitle_1"
                                 FontWeight="Bold"
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             <LineBreak />
-                            <Run x:Uid="AddARemote_FlyoutHelpKodi" />
+                            <Run x:Uid="AddARemote_FlyoutHelp_1" />
                             <LineBreak />
                             <LineBreak />
                             <Run
-                                x:Uid="AddARemote_FlyoutTitleZeroconf"
+                                x:Uid="AddARemote_FlyoutHelpTitle_2"
                                 FontWeight="Bold"
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             <LineBreak />
-                            <Run x:Uid="AddARemote_FlyoutHelpZeroconf" />
+                            <Run x:Uid="AddARemote_FlyoutHelp_2" />
                             <LineBreak />
                             <LineBreak />
                             <Run
-                                x:Uid="AddARemote_FlyoutTitleNetwork"
+                                x:Uid="AddARemote_FlyoutHelpTitle_3"
                                 FontWeight="Bold"
                                 Foreground="{ThemeResource SystemAccentColor}" />
                             <LineBreak />
-                            <Run x:Uid="AddARemote_FlyoutHelpNetwork" />
+                            <Run x:Uid="AddARemote_FlyoutHelp_3" />
                         </TextBlock>
 
                     </Flyout>
@@ -95,7 +95,7 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitlePage.Margin" Value="48,0,12,7" />
+                        <Setter Target="TextBlockTitle.Margin" Value="48,0,12,7" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
