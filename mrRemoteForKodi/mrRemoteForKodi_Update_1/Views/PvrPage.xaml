@@ -1,0 +1,167 @@
+﻿<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.PvrPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:mrRemoteForKodi_Update_1.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:mrRemoteForKodi_Update_1.Models"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="PvrChannelDataTemplate" x:DataType="data:PvrChannel">
+            <RelativePanel Margin="0,16">
+                <FontIcon
+                    x:Name="fontIconMedia"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="{ThemeResource SystemAccentColor}"
+                    Glyph="&#xEA69;" />
+                <TextBlock
+                    x:Name="textBlockName"
+                    Margin="16,0,0,0"
+                    FontWeight="Bold"
+                    RelativePanel.RightOf="fontIconMedia"
+                    Text="{x:Bind Label}"
+                    TextWrapping="Wrap" />
+            </RelativePanel>
+        </DataTemplate>
+
+        <Style x:Key="PvrChannelStyleTemplate" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="16,16,16,0" />
+            <Setter Property="Background" Value="{ThemeResource SystemChromeMediumColor}" />
+        </Style>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="PVR" />
+
+        <!--  relativepanel no fav icon/text  -->
+        <RelativePanel
+            x:Name="relativePanelNoFav"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.AlignVerticalCenterWithPanel="True"
+            Visibility="Collapsed">
+            <FontIcon
+                x:Name="fontIconNoFav"
+                Width="48"
+                Height="48"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="48"
+                Glyph="&#xE1CF;"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.AlignVerticalCenterWithPanel="True" />
+            <TextBlock
+                x:Name="textBlockNoFavRemote"
+                Margin="16,16,16,0"
+                RelativePanel.Below="fontIconNoFav"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                You have no favorite remote
+                <LineBreak />
+                <LineBreak />
+                Please go to the
+                <Bold>Configured Remotes Page</Bold>
+                and set one as your favorite
+            </TextBlock>
+        </RelativePanel>
+
+        <Pivot RelativePanel.Below="pageHeader">
+            <PivotItem Margin="0" Header="Tv">
+                <RelativePanel>
+                    <RelativePanel
+                        x:Name="relativePanelNoChannelList"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Visibility="Collapsed">
+                        <FontIcon
+                            x:Name="fontIconNoChannelList"
+                            Width="48"
+                            Height="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Glyph="&#xE8BD;"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <TextBlock
+                            x:Name="textBlockNoChannelList"
+                            Margin="16,16,16,0"
+                            RelativePanel.Below="fontIconNoChannelList"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            You do not have any Channel in this list
+                            <LineBreak />
+                            <LineBreak />
+                            Please check if your
+                            <Bold>PVR Add-on</Bold>
+                            is configured correctly
+                        </TextBlock>
+                    </RelativePanel>
+
+                    <ListView
+                        x:Name="listViewPvrTv"
+                        IsItemClickEnabled="True"
+                        ItemClick="listViewPvrTv_ItemClick"
+                        ItemContainerStyle="{StaticResource PvrChannelStyleTemplate}"
+                        ItemTemplate="{StaticResource PvrChannelDataTemplate}"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" />
+                </RelativePanel>
+            </PivotItem>
+
+            <PivotItem Margin="0" Header="Radio">
+                <RelativePanel>
+                    <RelativePanel
+                        x:Name="relativePanelNoRadioList"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Visibility="Collapsed">
+                        <FontIcon
+                            x:Name="fontIconRadioNoList"
+                            Width="48"
+                            Height="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Glyph="&#xE8BD;"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <TextBlock
+                            x:Name="textBlockNoRadioList"
+                            Margin="16,16,16,0"
+                            RelativePanel.Below="fontIconRadioNoList"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            You do not have any Channel in this list
+                            <LineBreak />
+                            <LineBreak />
+                            Please check if your
+                            <Bold>PVR Add-on</Bold>
+                            is configured correctly
+                        </TextBlock>
+                    </RelativePanel>
+
+                    <ListView
+                        x:Name="listViewPvrRadio"
+                        IsItemClickEnabled="True"
+                        ItemClick="listViewPvrRadio_ItemClick"
+                        ItemContainerStyle="{StaticResource PvrChannelStyleTemplate}"
+                        ItemTemplate="{StaticResource PvrChannelDataTemplate}"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" />
+                </RelativePanel>
+            </PivotItem>
+        </Pivot>
+    </RelativePanel>
+</Page>

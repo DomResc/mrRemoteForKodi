@@ -1,0 +1,183 @@
+﻿<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.MovieDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:mrRemoteForKodi_Update_1.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ImageConverter x:Key="ImageConverter" />
+        <converters:RatingConverter x:Key="RatingConverter" />
+        <converters:TimeConverter x:Key="RuntimeConverter" />
+    </Page.Resources>
+
+    <RelativePanel>
+        <RelativePanel.Background>
+            <ImageBrush
+                x:Name="imageBrushArt"
+                ImageSource="{x:Bind _movie.Fanart, Converter={StaticResource ImageConverter}}"
+                Opacity="0.10"
+                Stretch="UniformToFill" />
+        </RelativePanel.Background>
+
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="{x:Bind _movie.Title}" />
+
+        <ScrollViewer
+            x:Name="scrollViewerMovieInfo"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="pageHeader"
+            VerticalScrollBarVisibility="Auto">
+
+            <RelativePanel>
+                <Image
+                    x:Name="imageThumb"
+                    Width="100"
+                    Height="150"
+                    Margin="16,16,0,0"
+                    Source="{x:Bind _movie.Poster, Converter={StaticResource ImageConverter}}"
+                    Stretch="Uniform" />
+
+                <TextBlock
+                    x:Name="textBlockYear"
+                    Margin="16,16,0,0"
+                    RelativePanel.RightOf="imageThumb"
+                    Text="{x:Bind _movie.Year}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockSeparator"
+                    Margin="16,16,0,0"
+                    RelativePanel.RightOf="textBlockYear"
+                    Text="|" />
+
+                <TextBlock
+                    x:Name="textBlockRating"
+                    Margin="16,16,0,0"
+                    RelativePanel.RightOf="textBlockSeparator"
+                    Text="{x:Bind _movie.Rating, Converter={StaticResource RatingConverter}}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockRuntime"
+                    Margin="16,20,0,0"
+                    RelativePanel.Below="textBlockRating"
+                    RelativePanel.RightOf="imageThumb"
+                    Text="{x:Bind _movie.Runtime, Converter={StaticResource RuntimeConverter}}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockTagline"
+                    Margin="16,20,16,0"
+                    RelativePanel.Below="textBlockRuntime"
+                    RelativePanel.RightOf="imageThumb"
+                    Text="{x:Bind _movie.Tagline}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockGenre"
+                    Margin="16,30,16,0"
+                    RelativePanel.Below="textBlockTagline"
+                    RelativePanel.RightOf="imageThumb"
+                    Text="{x:Bind _movie.Genre}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockDirector"
+                    Margin="16,20,0,0"
+                    RelativePanel.Below="textBlockGenre"
+                    Text="Director: "
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockDirectorList"
+                    Margin="8,20,16,0"
+                    RelativePanel.Below="textBlockGenre"
+                    RelativePanel.RightOf="textBlockDirector"
+                    Text="{x:Bind _movie.Director}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockWriter"
+                    Margin="16,20,0,0"
+                    RelativePanel.Below="textBlockDirectorList"
+                    Text="Writer: "
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockWriterList"
+                    Margin="8,20,16,0"
+                    RelativePanel.Below="textBlockDirectorList"
+                    RelativePanel.RightOf="textBlockDirector"
+                    Text="{x:Bind _movie.Writer}"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockPlot"
+                    Margin="16,20,16,96"
+                    RelativePanel.Below="textBlockWriterList"
+                    Text="{x:Bind _movie.Plot}"
+                    TextWrapping="Wrap" />
+
+            </RelativePanel>
+        </ScrollViewer>
+
+        <Button
+            x:Name="buttonStartMovie"
+            Width="64"
+            Height="64"
+            Margin="0,0,16,16"
+            Background="Transparent"
+            BorderThickness="0"
+            Canvas.ZIndex="1"
+            Click="buttonStartMovie_Click"
+            Content="&#xE102;"
+            FontFamily="Segoe MDL2 Assets"
+            FontSize="48"
+            Foreground="{ThemeResource SystemAccentColor}"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True" />
+
+        <Button
+            x:Name="buttonPlayMovie"
+            Width="64"
+            Height="64"
+            Margin="0,0,16,16"
+            Background="Transparent"
+            BorderThickness="0"
+            Canvas.ZIndex="1"
+            Content="&#xE116;"
+            FontFamily="Segoe MDL2 Assets"
+            FontSize="48"
+            Foreground="{ThemeResource SystemAccentColor}"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.LeftOf="buttonStartMovie" Click="buttonPlayMovie_Click" />
+
+        <HyperlinkButton
+            x:Name="buttonImdb"
+            Width="64"
+            Height="64"
+            Margin="0,0,16,16"
+            Background="Transparent"
+            BorderThickness="0"
+            Canvas.ZIndex="1"
+            Content="&#xE12B;"
+            FontFamily="Segoe MDL2 Assets"
+            FontSize="48"
+            Foreground="{ThemeResource SystemAccentColor}"
+            NavigateUri="{x:Bind _imdbLink}"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.LeftOf="buttonPlayMovie" />
+
+    </RelativePanel>
+</Page>

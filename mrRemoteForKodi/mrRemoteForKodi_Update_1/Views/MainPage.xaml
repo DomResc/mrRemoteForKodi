@@ -1,0 +1,957 @@
+<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:mrRemoteForKodi_Update_1.Models"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    Unloaded="Page_Unloaded"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="SubtitleDataTemplate" x:DataType="data:Subtitle">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="textBlockLanguage" Text="{x:Bind Language}" />
+                <TextBlock Text=":" />
+                <TextBlock
+                    x:Name="textBlockName"
+                    Margin="16,0,0,0"
+                    Text="{x:Bind Name}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="AudioStreamDataTemplate" x:DataType="data:AudioStream">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="textBlockLanguage" Text="{x:Bind Language}" />
+                <TextBlock Text=":" />
+                <TextBlock
+                    x:Name="textBlockName"
+                    Margin="16,0,0,0"
+                    Text="{x:Bind Name}" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <RelativePanel>
+        <RelativePanel.Background>
+            <ImageBrush
+                x:Name="imageBrushArt"
+                Opacity="0.10"
+                Stretch="UniformToFill" />
+        </RelativePanel.Background>
+
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True">
+            <!--  primary commands  -->
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarToggleButton
+                    x:Name="appBarToggleButtonControl"
+                    Click="appBarToggleButtonControl_Click"
+                    Icon="View"
+                    Label="Show player control" />
+            </controls:PageHeader.PrimaryCommands>
+            <!--  secondary commands  -->
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton
+                    x:Name="appBarButtonToggleFullscreen"
+                    Click="appBarButtonToggleFullscreen_Click"
+                    Label="Toggle fullscreen" />
+                <AppBarButton
+                    x:Name="appBarButtonSelectProfile"
+                    Click="appBarButtonSelectProfile_Click"
+                    Label="Select the profile" />
+                <AppBarButton x:Name="appBarButtonLibraryManagment" Label="Library managment">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemScanAudioLibrary"
+                                Click="menuFlyoutItemScanAudioLibrary_Click"
+                                Text="Scan audio library" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemScanVideoLibrary"
+                                Click="menuFlyoutItemScanVideoLibrary_Click"
+                                Text="Scan video library" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemCleanAudioLibrary"
+                                Click="menuFlyoutItemCleanAudioLibrary_Click"
+                                Text="Clean audio library" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemCleanVideoLibrary"
+                                Click="menuFlyoutItemCleanVideoLibrary_Click"
+                                Text="Clean video library" />
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <AppBarSeparator />
+                <AppBarButton Label="Shutdown menu">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemExit"
+                                Click="menuFlyoutItemExit_Click"
+                                Text="Exit" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemHibernate"
+                                Click="menuFlyoutItemHibernate_Click"
+                                Text="Hibernate" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemSuspend"
+                                Click="menuFlyoutItemSuspend_Click"
+                                Text="Suspend" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemShutdown"
+                                Click="menuFlyoutItemShutdown_Click"
+                                Text="Shutdown" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemReboot"
+                                Click="menuFlyoutItemReboot_Click"
+                                Text="Reboot" />
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+
+        <!--  relativepanel no fav icon/text  -->
+        <RelativePanel
+            x:Name="relativePanelNoFav"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.AlignVerticalCenterWithPanel="True"
+            Visibility="Collapsed">
+            <FontIcon
+                x:Name="fontIconNoFav"
+                Width="48"
+                Height="48"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="48"
+                Glyph="&#xE1CF;"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.AlignVerticalCenterWithPanel="True" />
+            <TextBlock
+                x:Name="textBlockNoFavRemote"
+                Margin="16,16,16,0"
+                RelativePanel.Below="fontIconNoFav"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                You have no favorite remote
+                <LineBreak />
+                <LineBreak />
+                Please go to the
+                <Bold>Configured Remotes Page</Bold>
+                and set one as your favorite
+            </TextBlock>
+        </RelativePanel>
+
+        <!--  relativepanel no run icon/text  -->
+        <RelativePanel
+            x:Name="relativePanelNoConnection"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.AlignVerticalCenterWithPanel="True"
+            Visibility="Visible">
+            <FontIcon
+                x:Name="fontIconNoConnection"
+                Width="48"
+                Height="48"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="48"
+                Glyph="&#xE952;"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.AlignVerticalCenterWithPanel="True" />
+            <TextBlock
+                x:Name="textBlockNoRun"
+                Margin="16,16,16,0"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.Below="fontIconNoConnection"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                <Bold>Cannot connect to Kodi/XBMC</Bold>
+            </TextBlock>
+        </RelativePanel>
+
+        <!--  relativepanel all controls  -->
+        <RelativePanel
+            x:Name="relativePanelAllControl"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="pageHeader"
+            Visibility="Collapsed">
+
+            <!--  placeholder rectangle  -->
+            <Rectangle
+                x:Name="rectanglePlaceHolder"
+                Width="320"
+                Height="320"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True" />
+            <!--  relativepanel no playing icon/text  -->
+
+            <RelativePanel
+                x:Name="relativePanelItemNoPlaying"
+                RelativePanel.Above="rectanglePlaceHolder"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignTopWithPanel="True"
+                Visibility="Collapsed">
+                <FontIcon
+                    x:Name="fontIconNoPlay"
+                    Width="48"
+                    Height="48"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="48"
+                    Glyph="&#xE102;"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True" />
+                <TextBlock
+                    x:Name="textBlockNoPlaying"
+                    Margin="16,16,16,0"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.Below="fontIconNoPlay"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
+                    <Bold>Nothing in Play</Bold>
+                </TextBlock>
+            </RelativePanel>
+
+            <!--  relativepanel art and info  -->
+            <RelativePanel
+                x:Name="relativePanelPlayerArtInfo"
+                RelativePanel.Above="rectanglePlaceHolder"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignTopWithPanel="True"
+                Visibility="Collapsed">
+
+                <ScrollViewer
+                    x:Name="scrollViewerTextInfo"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalScrollBarVisibility="Auto">
+
+                    <RelativePanel>
+                        <Image
+                            x:Name="imageThumb"
+                            Height="150"
+                            MaxWidth="100"
+                            Margin="16,16,0,0"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Stretch="Uniform" />
+
+                        <TextBlock
+                            x:Name="textBlockTitle"
+                            Margin="16,16,0,0"
+                            FontSize="22"
+                            RelativePanel.RightOf="imageThumb"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockYearRating"
+                            Margin="16,20,0,0"
+                            RelativePanel.Below="textBlockTitle"
+                            RelativePanel.RightOf="imageThumb"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockGeneric"
+                            Margin="16,20,0,0"
+                            RelativePanel.Below="textBlockYearRating"
+                            RelativePanel.RightOf="imageThumb"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockGenre"
+                            Margin="16,20,0,0"
+                            RelativePanel.Below="textBlockGeneric"
+                            RelativePanel.RightOf="imageThumb"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockDirector"
+                            Margin="16,20,0,0"
+                            RelativePanel.Below="textBlockGenre"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockWriter"
+                            Margin="16,20,0,0"
+                            RelativePanel.Below="textBlockDirector"
+                            TextWrapping="Wrap" />
+
+                        <TextBlock
+                            x:Name="textBlockPlot"
+                            Margin="16,20,16,16"
+                            RelativePanel.Below="textBlockWriter"
+                            TextWrapping="Wrap" />
+                    </RelativePanel>
+                </ScrollViewer>
+            </RelativePanel>
+
+            <!--  relativepanel player control  -->
+            <RelativePanel
+                x:Name="relativePanelPlayerControl"
+                Width="320"
+                Height="320"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                Visibility="Collapsed">
+                <RelativePanel.Background>
+                    <SolidColorBrush Opacity="0.75" Color="{ThemeResource SystemAltHighColor}" />
+                </RelativePanel.Background>
+
+                <Slider
+                    x:Name="sliderSeekBar"
+                    Margin="16,16,16,0"
+                    IsThumbToolTipEnabled="False"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    ValueChanged="sliderSeekBar_ValueChanged" />
+
+                <TextBlock
+                    x:Name="textBlockTime"
+                    Margin="16,0,0,0"
+                    RelativePanel.AlignLeftWith="sliderSeekBar"
+                    RelativePanel.Below="sliderSeekBar"
+                    Text="00:00:00"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    x:Name="textBlockTotalTime"
+                    Margin="0,0,16,0"
+                    RelativePanel.AlignRightWith="sliderSeekBar"
+                    RelativePanel.Below="sliderSeekBar"
+                    Text="00:00:00"
+                    TextWrapping="Wrap" />
+
+                <Viewbox
+                    RelativePanel.Above="buttonVolume"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.Below="textBlockTime">
+                    <RelativePanel>
+                        <Button
+                            x:Name="buttonPlayPause"
+                            Width="64"
+                            Height="64"
+                            Margin="0,0,64,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonPlayPause_Click"
+                            Content="&#xE102;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+
+                        <Button
+                            x:Name="buttonStop"
+                            Width="64"
+                            Height="64"
+                            Margin="64,0,0,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonStop_Click"
+                            Content="&#xE003;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="16"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+
+                        <Button
+                            x:Name="buttonPrevious"
+                            Width="64"
+                            Height="64"
+                            Margin="0,64,0,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonPrevious_Click"
+                            Content="&#xE100;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignVerticalCenterWith="buttonPlayPause"
+                            RelativePanel.LeftOf="buttonPlayPause" />
+
+                        <Button
+                            x:Name="buttonNext"
+                            Width="64"
+                            Height="64"
+                            Margin="0,64,0,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonNext_Click"
+                            Content="&#xE101;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignVerticalCenterWith="buttonPlayPause"
+                            RelativePanel.RightOf="buttonStop" />
+
+                        <Button
+                            x:Name="buttonStepBack"
+                            Width="64"
+                            Height="64"
+                            Margin="0,0,0,64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonStepBack_Click"
+                            Content="&#xE10E;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True" />
+
+                        <Button
+                            x:Name="buttonStepForward"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonStepForward_Click"
+                            Content="&#xE10D;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True" />
+                    </RelativePanel>
+                </Viewbox>
+
+                <Button
+                    x:Name="buttonSubtitles"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="buttonSubtitles_Click"
+                    Content="&#xE190;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonVolume"
+                    RelativePanel.LeftOf="buttonAudioTrack">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Text="Subtitles:" />
+                                <ListView
+                                    x:Name="listViewSubtitles"
+                                    Margin="0,16,0,0"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="listViewSubtitles_ItemClick"
+                                    ItemTemplate="{StaticResource SubtitleDataTemplate}"
+                                    Visibility="Collapsed" />
+                                <ToggleSwitch
+                                    x:Name="toggleSwitchSubtitle"
+                                    Margin="0,16,0,0"
+                                    HorizontalAlignment="Stretch"
+                                    Header="Show subtitle"
+                                    IsEnabled="False"
+                                    Toggled="toggleSwitchSubtitle_Toggled" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button
+                    x:Name="buttonAudioTrack"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="buttonAudioTrack_Click"
+                    Content="&#xE189;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonVolume"
+                    RelativePanel.LeftOf="buttonVolume">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Text="Audio tracks:" />
+                                <ListView
+                                    x:Name="listViewAudiostreams"
+                                    Margin="0,16,0,0"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="listViewAudiostreams_ItemClick"
+                                    ItemTemplate="{StaticResource AudioStreamDataTemplate}" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button
+                    x:Name="buttonVolume"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE15D;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    x:Name="buttonMute"
+                                    Width="44"
+                                    Height="44"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Click="buttonMute_Click"
+                                    Content="&#xE198;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    FontSize="18" />
+                                <Slider
+                                    x:Name="sliderVolumeBar"
+                                    Width="192"
+                                    Margin="16,0,0,0"
+                                    ValueChanged="sliderVolumeBar_ValueChanged" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button
+                    x:Name="buttonRepeat"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE1CD;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonVolume"
+                    RelativePanel.RightOf="buttonVolume">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="MenuFlyoutItemRepeatAll"
+                                Click="MenuFlyoutItemRepeatAll_Click"
+                                Text="Repeat All" />
+                            <MenuFlyoutItem
+                                x:Name="MenuFlyoutItemRepeatOne"
+                                Click="MenuFlyoutItemRepeatOne_Click"
+                                Text="Repeat One" />
+                            <MenuFlyoutItem
+                                x:Name="MenuFlyoutItemRepeatOff"
+                                Click="MenuFlyoutItemRepeatOff_Click"
+                                Text="Repeat Off" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button
+                    x:Name="buttonShuffle"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE14B;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonVolume"
+                    RelativePanel.RightOf="buttonRepeat">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="MenuFlyoutItemShuffleOn"
+                                Click="MenuFlyoutItemShuffleOn_Click"
+                                Text="Shuffle On" />
+                            <MenuFlyoutItem
+                                x:Name="MenuFlyoutItemShuffleOff"
+                                Click="MenuFlyoutItemShuffleOff_Click"
+                                Text="Shuffle Off" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </RelativePanel>
+
+            <!--  relativepanel control navigation  -->
+            <RelativePanel
+                x:Name="relativePanelControlNavigation"
+                Width="320"
+                Height="320"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                Visibility="Visible">
+                <RelativePanel.Background>
+                    <SolidColorBrush Opacity="0.75" Color="{ThemeResource SystemAltHighColor}" />
+                </RelativePanel.Background>
+
+                <Viewbox
+                    RelativePanel.Above="buttonMusic"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True">
+                    <RelativePanel>
+                        <Button
+                            x:Name="buttonEnter"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonEnter_Click"
+                            Content="&#xE18A;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="36"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <Button
+                            x:Name="buttonBack"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonBack_Click"
+                            Content="&#xE0A6;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignVerticalCenterWith="buttonDown"
+                            RelativePanel.LeftOf="buttonDown" />
+                        <Button
+                            x:Name="buttonMenu"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonMenu_Click"
+                            Content="&#xE10C;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignVerticalCenterWith="buttonDown"
+                            RelativePanel.RightOf="buttonDown" />
+                        <Button
+                            x:Name="buttonOsd"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Content="&#xE91C;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
+                            RelativePanel.AlignVerticalCenterWith="buttonUp"
+                            RelativePanel.LeftOf="buttonUp">
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem
+                                        x:Name="menuFlyoutItemOsd"
+                                        Click="menuFlyoutItemOsd_Click"
+                                        Text="Show osd" />
+                                    <MenuFlyoutItem
+                                        x:Name="menuFlyoutItemInfo"
+                                        Click="menuFlyoutItemInfo_Click"
+                                        Text="Show info" />
+                                    <MenuFlyoutItem
+                                        x:Name="menuFlyoutItemCodec"
+                                        Click="menuFlyoutItemCodec_Click"
+                                        Text="Show codec" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                        <Button
+                            x:Name="buttonShowSendText"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Content="&#xE087;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="20"
+                            RelativePanel.AlignVerticalCenterWith="buttonUp"
+                            RelativePanel.RightOf="buttonUp">
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel>
+                                        <TextBlock Text="Send text:" />
+                                        <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
+                                            <TextBox
+                                                x:Name="textBoxSendText"
+                                                Width="192"
+                                                Height="32"
+                                                PlaceholderText="..."
+                                                TextWrapping="Wrap" />
+                                            <Button
+                                                x:Name="buttonSendText"
+                                                Width="64"
+                                                Height="32"
+                                                Click="buttonSendText_Click"
+                                                Content="&#xE122;"
+                                                FontFamily="Segoe MDL2 Assets" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                        <RepeatButton
+                            x:Name="buttonUp"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonUp_Click"
+                            Content="&#xE96D;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Foreground="{ThemeResource SystemAccentColor}"
+                            Interval="100"
+                            RelativePanel.Above="buttonEnter"
+                            RelativePanel.AlignHorizontalCenterWith="buttonEnter" />
+                        <RepeatButton
+                            x:Name="buttonDown"
+                            Width="64"
+                            Height="64"
+                            Margin="0,0,2,1"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonDown_Click"
+                            Content="&#xE96E;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Foreground="{ThemeResource SystemAccentColor}"
+                            Interval="100"
+                            RelativePanel.AlignHorizontalCenterWith="buttonEnter"
+                            RelativePanel.Below="buttonEnter" />
+                        <RepeatButton
+                            x:Name="buttonLeft"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonLeft_Click"
+                            Content="&#xE96F;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Foreground="{ThemeResource SystemAccentColor}"
+                            Interval="100"
+                            RelativePanel.AlignVerticalCenterWith="buttonEnter"
+                            RelativePanel.LeftOf="buttonEnter" />
+                        <RepeatButton
+                            x:Name="buttonRight"
+                            Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="buttonRight_Click"
+                            Content="&#xE970;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Foreground="{ThemeResource SystemAccentColor}"
+                            Interval="100"
+                            RelativePanel.AlignVerticalCenterWith="buttonEnter"
+                            RelativePanel.RightOf="buttonEnter" />
+                    </RelativePanel>
+                </Viewbox>
+
+                <Button
+                    x:Name="buttonHome"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE10F;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonMusic"
+                    RelativePanel.LeftOf="buttonVideo">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemHome"
+                                Click="menuFlyoutItemHome_Click"
+                                Text="Home" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemPlayer"
+                                Click="menuFlyoutItemPlayer_Click"
+                                Text="Player" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                <Button
+                    x:Name="buttonVideo"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE116;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonMusic"
+                    RelativePanel.LeftOf="buttonMusic">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemMovies"
+                                Click="menuFlyoutItemMovies_Click"
+                                Text="Movies" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemTvShows"
+                                Click="menuFlyoutItemTvShows_Click"
+                                Text="Tv Shows" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemMusicVideos"
+                                Click="menuFlyoutItemMusicVideos_Click"
+                                Text="Music Videos" />
+                            <MenuFlyoutSubItem x:Name="menuFlyoutSubItemPvr" Text="PVR">
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrTvChannels"
+                                    Click="menuFlyoutItemPvrTvChannels_Click"
+                                    Text="TV Channel" />
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrTvRecordings"
+                                    Click="menuFlyoutItemPvrTvRecordings_Click"
+                                    Text="TV Recordings" />
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrTvGuide"
+                                    Click="menuFlyoutItemPvrTvGuide_Click"
+                                    Text="TV Guide" />
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrRadioChannels"
+                                    Click="menuFlyoutItemPvrRadioChannels_Click"
+                                    Text="Radio Channel" />
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrRadioRecordings"
+                                    Click="menuFlyoutItemPvrRadioRecordings_Click"
+                                    Text="Radio Recordings" />
+                                <MenuFlyoutItem
+                                    x:Name="menuFlyoutItemPvrRadioGuide"
+                                    Click="menuFlyoutItemPvrRadioGuide_Click"
+                                    Text="Radio Guide" />
+                            </MenuFlyoutSubItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                <Button
+                    x:Name="buttonMusic"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xE189;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemArtists"
+                                Click="menuFlyoutItemArtists_Click"
+                                Text="Artists" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemAlbums"
+                                Click="menuFlyoutItemAlbums_Click"
+                                Text="Albums" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemGeneres"
+                                Click="menuFlyoutItemGeneres_Click"
+                                Text="Generes" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemPlaylists"
+                                Click="menuFlyoutItemPlaylists_Click"
+                                Text="Playlists" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                <Button
+                    x:Name="buttonPictures"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="buttonPictures_Click"
+                    Content="&#xEB9F;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonMusic"
+                    RelativePanel.RightOf="buttonMusic" />
+                <Button
+                    x:Name="buttonAddons"
+                    Width="64"
+                    Height="64"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Content="&#xEA86;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="18"
+                    RelativePanel.AlignVerticalCenterWith="buttonMusic"
+                    RelativePanel.RightOf="buttonPictures">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemVideoAddons"
+                                Click="menuFlyoutItemVideoAddons_Click"
+                                Text="Video Addons" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemMusicAddons"
+                                Click="menuFlyoutItemMusicAddons_Click"
+                                Text="Music Addons" />
+                            <MenuFlyoutItem
+                                x:Name="menuFlyoutItemProgramAddons"
+                                Click="menuFlyoutItemProgramAddons_Click"
+                                Text="Program Addons" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </RelativePanel>
+        </RelativePanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  Min Window Width  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  move the control button  -->
+                        <Setter Target="relativePanelPlayerControl.RelativePanel.AlignLeftWithPanel" Value="True" />
+                        <Setter Target="relativePanelPlayerControl.Margin" Value="16,0,0,0" />
+                        <Setter Target="relativePanelControlNavigation.RelativePanel.AlignRightWithPanel" Value="True" />
+                        <Setter Target="relativePanelControlNavigation.Margin" Value="0,0,16,0" />
+                        <!--  uncheck the togglebutton and make the controls visible  -->
+                        <Setter Target="appBarToggleButtonControl.IsEnabled" Value="False" />
+                        <Setter Target="appBarToggleButtonControl.IsChecked" Value="False" />
+                        <Setter Target="relativePanelPlayerControl.Visibility" Value="Visible" />
+                        <Setter Target="relativePanelControlNavigation.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  move the control button  -->
+                        <Setter Target="relativePanelPlayerControl.RelativePanel.AlignLeftWithPanel" Value="True" />
+                        <Setter Target="relativePanelPlayerControl.Margin" Value="16,0,0,0" />
+                        <Setter Target="relativePanelControlNavigation.RelativePanel.AlignRightWithPanel" Value="True" />
+                        <Setter Target="relativePanelControlNavigation.Margin" Value="0,0,16,0" />
+                        <!--  uncheck the togglebutton and make the controls visible  -->
+                        <Setter Target="appBarToggleButtonControl.IsEnabled" Value="False" />
+                        <Setter Target="appBarToggleButtonControl.IsChecked" Value="False" />
+                        <Setter Target="relativePanelPlayerControl.Visibility" Value="Visible" />
+                        <Setter Target="relativePanelControlNavigation.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

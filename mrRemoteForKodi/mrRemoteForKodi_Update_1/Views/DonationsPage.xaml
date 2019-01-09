@@ -1,0 +1,73 @@
+﻿<Page x:Class="mrRemoteForKodi_Update_1.Views.DonationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="pageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="DONATE" />
+
+        <ScrollViewer RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Below="pageHeader"
+                      VerticalScrollBarVisibility="Auto">
+
+            <StackPanel>
+                <TextBlock x:Name="textBlockDonatePageDescription"
+                           Margin="16,16,16,0"
+                           TextWrapping="Wrap">
+                    Hello!
+                    <LineBreak />
+                    mrRemote for Kodi is now
+                    <Bold>completely free</Bold>
+                    and
+                    <Bold>Ad-Free</Bold>
+                    <LineBreak />
+                    <LineBreak />
+                    This does not mean that its development has ended, indeed, with your support and with your suggestions I want to continue to
+                    <Bold>develop and improve</Bold>
+                    even more this application.
+                    <LineBreak />
+                    <LineBreak />
+                    If you want, you can directly support the application with the following in-app purchases
+                </TextBlock>
+
+                <Button x:Name="buttonDonate099"
+                        Width="128"
+                        Margin="0,32,0,0"
+                        HorizontalAlignment="Center"
+                        Click="buttonDonate099_Click"
+                        Content="Small - 0.99 $" />
+
+                <Button x:Name="buttonDonate499"
+                        Width="128"
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Center"
+                        Click="buttonDonate499_Click"
+                        Content="Medium - 4.99 $" />
+
+                <Button x:Name="buttonDonate999"
+                        Width="128"
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Center"
+                        Click="buttonDonate999_Click"
+                        Content="Large - 9.99 $" />
+
+                <TextBlock x:Name="textBlockPurchase" Margin="16,32,0,0" />
+
+                <AppBarButton HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Icon="Emoji2"
+                              IsEnabled="false" />
+            </StackPanel>
+        </ScrollViewer>
+    </RelativePanel>
+</Page>

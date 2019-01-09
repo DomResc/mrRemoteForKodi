@@ -1,0 +1,330 @@
+<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="using:Template10.Behaviors"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:Template10.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:mrRemoteForKodi_Update_1.ViewModels"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:SettingsPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--  header  -->
+        <controls:PageHeader
+            x:Name="pageHeader"
+            Content="SETTINGS"
+            Frame="{x:Bind Frame}"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True" />
+
+        <!--  content  -->
+        <Pivot
+            x:Name="MyPivot"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="pageHeader">
+
+            <!--  settings  -->
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="General">
+                <ScrollViewer HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
+                    <RelativePanel HorizontalAlignment="Left">
+
+                        <ToggleSwitch
+                            x:Name="toggleSwitchVibrateOnPress"
+                            Header="Vibrate on button press"
+                            IsOn="{Binding VibrateOnPress, Mode=TwoWay}"
+                            OffContent="No"
+                            OnContent="Yes"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True" />
+
+                        <ToggleSwitch
+                            x:Name="toggleSwitchSystemTheme"
+                            Header="Use system theme"
+                            IsOn="{Binding UseSystemTheme, Mode=TwoWay}"
+                            OffContent="No"
+                            OnContent="Yes"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.Below="toggleSwitchVibrateOnPress"
+                            Toggled="toggleSwitchSystemTheme_Toggled" />
+
+                        <ToggleSwitch
+                            x:Name="UseLightThemeToggleSwitch"
+                            Header="Select the theme"
+                            IsOn="{Binding UseLightThemeButton, Mode=TwoWay}"
+                            OffContent="Dark theme"
+                            OnContent="Light theme"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.Below="toggleSwitchSystemTheme"
+                            Toggled="UseLightThemeToggleSwitch_Toggled" />
+
+                        <TextBlock
+                            x:Name="textBlockRebootApp"
+                            Foreground="{ThemeResource SystemAccentColor}"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.Below="UseLightThemeToggleSwitch"
+                            Text="Please reboot the app to apply the changes"
+                            TextWrapping="Wrap"
+                            Visibility="Collapsed" />
+
+                    </RelativePanel>
+                </ScrollViewer>
+            </PivotItem>
+
+            <!--  about  -->
+            <PivotItem Header="About">
+                <RelativePanel DataContext="{Binding AboutPartViewModel}">
+
+                    <TextBlock
+                        x:Name="DisplayNameTextBlock"
+                        Margin="0,0,0,16"
+                        FontSize="24"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True"
+                        Text="{Binding DisplayName}"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        x:Name="PublisherTextBlock"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="DisplayNameTextBlock"
+                        Text="{Binding Publisher}"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        x:Name="VersionTextBlock"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="PublisherTextBlock"
+                        TextWrapping="Wrap">
+                        <Run>Version</Run>
+                        <Run Text="{Binding Version}" />
+                    </TextBlock>
+
+                    <TextBlock
+                        x:Name="ContactsTextBlock"
+                        Margin="0,24,0,0"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="VersionTextBlock"
+                        Text="Contacts"
+                        TextWrapping="Wrap" />
+
+                    <HyperlinkButton
+                        x:Name="WebsiteHyperlinkButton"
+                        Content="Website"
+                        NavigateUri="{Binding Website}"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="ContactsTextBlock" />
+
+                    <HyperlinkButton
+                        x:Name="EmailHyperlinkButton"
+                        Content="Email"
+                        NavigateUri="{Binding Email}"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="WebsiteHyperlinkButton" />
+
+                    <HyperlinkButton
+                        x:Name="TwitterHyperlinkButton"
+                        Content="Twitter"
+                        NavigateUri="{Binding Twitter}"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="EmailHyperlinkButton" />
+
+                    <TextBlock
+                        x:Name="RateMeTextBlock"
+                        Margin="0,24,0,0"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="TwitterHyperlinkButton"
+                        Text="Rate Me"
+                        TextWrapping="Wrap" />
+
+                    <HyperlinkButton
+                        x:Name="RateMeHyperlinkButton"
+                        Content="Rate and Review"
+                        NavigateUri="{Binding RateMe}"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="RateMeTextBlock" />
+                </RelativePanel>
+            </PivotItem>
+
+            <!--  changelog  -->
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Changelog">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <TextBlock LineHeight="24" TextWrapping="Wrap">
+
+                        <Bold>2.0.10.0</Bold>
+                        <LineBreak />
+                        - Backspace as Backbutton ( win + backspace)
+                        <LineBreak />
+                        - The sorting order is now stored until you close the app
+                        <LineBreak />
+                        - Optimized performances during the library synchronization
+                        <LineBreak />
+                        - Fixed some bugs
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.9.0</Bold>
+                        <LineBreak />
+                        - Added video player to watch movies and tv series
+                        <LineBreak />
+                        - Added to the video player the possibility to cast toward other devices
+                        <LineBreak />
+                        - Fixed the bug that did not allow to display arts for some elements
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.8.0</Bold>
+                        <LineBreak />
+                        - Added sorting &quot;by date added&quot; for movies and tv series
+                        <LineBreak />
+                        - Added the possibility to search among the films by title, director or genre
+                        <LineBreak />
+                        - Added the possibility to search among the tv series by title or genre
+                        <LineBreak />
+                        - Added the possibility to search among the music by artist or genre
+                        <LineBreak />
+                        - Added the link to the imdb page for the movie
+                        <LineBreak />
+                        - Added Kodi exit to shutdown menu
+                        <LineBreak />
+                        - Removed link to AppStretch
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.7.0</Bold>
+                        <LineBreak />
+                        - Update database library
+                        <LineBreak />
+                        - Optimized performances during the library synchronization
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.6.0</Bold>
+                        <LineBreak />
+                        - Fixed some bugs
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.5.0</Bold>
+                        <LineBreak />
+                        - Optimized Music page
+                        <LineBreak />
+                        - Added Files page
+                        <LineBreak />
+                        - Some UI tweaks
+                        <LineBreak />
+                        - Fixed some bugs
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.4.0</Bold>
+                        <LineBreak />
+                        - Fixed some bugs
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.3.0</Bold>
+                        <LineBreak />
+                        - Added Music page
+                        <LineBreak />
+                        - Optimized PVR page
+                        <LineBreak />
+                        - Now you can use wake on lan to turn on remote mediacenter
+                        <LineBreak />
+                        - Now you can configure remotes without password
+                        <LineBreak />
+                        - Click on the information button and show osd, info or codec info
+                        <LineBreak />
+                        - Fixed a bug that cause app crash when you open the pvr page without pvr configured
+                        <LineBreak />
+                        - Fixed a bug that cause app crash when you try to refresh the media database
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.2.0</Bold>
+                        <LineBreak />
+                        - Added Pvr page, to fast switch between tv and radio channels
+                        <LineBreak />
+                        - Modified TV Show page, now the episodes are showed in a list with some useful information
+                        <LineBreak />
+                        - Fixed some UI bugs
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.1.0</Bold>
+                        <LineBreak />
+                        - Fixed a bug that was blocking the application in case of in-app purchase with versions of Windows previus 1607 (Anniversary Update)
+                        <LineBreak />
+                        - Added the page TV Shows
+                        <LineBreak />
+                        - Added buttons step back and forward (you can configure the skip step in Kodi/Xbmc System -&gt; Videos -&gt; Playback)
+                        <LineBreak />
+                        - Adding a confirmation dialog for deleting a remote control
+                        <LineBreak />
+                        - Changed the way to display the time from 0:0:0 to 00:00:00
+                        <LineBreak />
+                        - Increased the size of the control buttons
+                        <LineBreak />
+                        <LineBreak />
+
+                        <Bold>2.0.0.0</Bold>
+                        <LineBreak />
+                        - First release
+                    </TextBlock>
+                </ScrollViewer>
+            </PivotItem>
+
+            <!--  coming soon  -->
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Coming soon">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <TextBlock LineHeight="24" TextWrapping="Wrap">
+                        Contact me if you have ideas or suggestions
+                    </TextBlock>
+
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

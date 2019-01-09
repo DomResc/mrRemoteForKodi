@@ -1,0 +1,160 @@
+﻿<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.ArtistDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:mrRemoteForKodi_Update_1.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:mrRemoteForKodi_Update_1.Models"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ImageConverter x:Key="ImageConverter" />
+
+        <DataTemplate x:Key="AlbumDataTemplate" x:DataType="data:Album">
+            <StackPanel x:Name="stackPanelSeason">
+                <Image
+                    x:Name="imagePoster"
+                    Width="136"
+                    Height="136"
+                    Source="{x:Bind Poster, Converter={StaticResource ImageConverter}}"
+                    Stretch="Uniform" />
+                <TextBlock
+                    x:Name="textBlockLabel"
+                    FontWeight="Bold"
+                    Text="{x:Bind Label}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </DataTemplate>
+
+        <Style x:Key="AlbumStyleTemplate" TargetType="GridViewItem">
+            <Setter Property="Width" Value="136" />
+            <Setter Property="Height" Value="196" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="16,16,0,0" />
+        </Style>
+
+        <DataTemplate x:Key="SongDataTemplate" x:DataType="data:Song">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    x:Name="textBlockTrack"
+                    Text="{x:Bind Track}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="textBlockLabel"
+                    Margin="16,0,0,0"
+                    Text="{x:Bind Label}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </DataTemplate>
+
+        <Style x:Key="SongStyleTemplate" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </Page.Resources>
+
+    <RelativePanel>
+        <RelativePanel.Background>
+            <ImageBrush
+                x:Name="imageBrushArt"
+                ImageSource="{x:Bind _artist.Fanart, Converter={StaticResource ImageConverter}}"
+                Opacity="0.10"
+                Stretch="UniformToFill" />
+        </RelativePanel.Background>
+
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="{x:Bind _artist.Label}">
+
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="appBarButtonInfo" Label="Info">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE946;" />
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <TextBlock
+                                x:Name="textBlockInfo"
+                                Width="320"
+                                TextWrapping="Wrap">
+                                <Run Text="Genre: " />
+                                <Run Text="{x:Bind _artist.Genre}" />
+                                <LineBreak />
+                                <LineBreak />
+                                <Run Text="Description: " />
+                                <Run Text="{x:Bind _artist.Description}" />
+                            </TextBlock>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </controls:PageHeader.PrimaryCommands>
+
+        </controls:PageHeader>
+
+        <ScrollViewer
+            x:Name="scrollViewerTvShowInfo"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="pageHeader"
+            VerticalScrollBarVisibility="Auto">
+
+            <RelativePanel>
+                <GridView
+                    x:Name="GridViewAlbum"
+                    IsItemClickEnabled="True"
+                    ItemClick="GridViewAlbum_ItemClick"
+                    ItemContainerStyle="{StaticResource AlbumStyleTemplate}"
+                    ItemTemplate="{StaticResource AlbumDataTemplate}"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True" />
+
+                <ListView
+                    x:Name="listViewSong"
+                    IsItemClickEnabled="True"
+                    ItemClick="listViewSong_ItemClick"
+                    ItemContainerStyle="{StaticResource SongStyleTemplate}"
+                    ItemTemplate="{StaticResource SongDataTemplate}"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.Below="GridViewAlbum" />
+            </RelativePanel>
+        </ScrollViewer>
+
+        <Button
+            x:Name="buttonStartArtist"
+            Width="64"
+            Height="64"
+            Margin="0,0,16,16"
+            Background="Transparent"
+            BorderThickness="0"
+            Canvas.ZIndex="1"
+            Click="buttonStartArtist_Click"
+            Content="&#xE102;"
+            FontFamily="Segoe MDL2 Assets"
+            FontSize="48"
+            Foreground="{ThemeResource SystemAccentColor}"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True">
+            <Button.Flyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem
+                        x:Name="menuFlyoutItemAlbum"
+                        Click="menuFlyoutItemAlbum_Click"
+                        Text="Play Album" />
+                    <MenuFlyoutItem
+                        x:Name="menuFlyoutItemArtist"
+                        Click="menuFlyoutItemArtist_Click"
+                        Text="Play Artist" />
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
+
+    </RelativePanel>
+</Page>

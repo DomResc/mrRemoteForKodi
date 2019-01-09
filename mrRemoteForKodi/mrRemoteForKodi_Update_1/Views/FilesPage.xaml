@@ -1,0 +1,197 @@
+﻿<Page
+    x:Class="mrRemoteForKodi_Update_1.Views.FilesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="using:mrRemoteForKodi_Update_1.Models"
+    xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="FileDataTemplate" x:DataType="data:FileDirectory">
+            <RelativePanel Margin="0,16">
+                <FontIcon
+                    x:Name="fontIconMedia"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="{ThemeResource SystemAccentColor}"
+                    Glyph="&#xE160;" />
+                <TextBlock
+                    x:Name="textBlockName"
+                    Margin="16,0,0,0"
+                    FontWeight="Bold"
+                    RelativePanel.AlignVerticalCenterWith="fontIconMedia"
+                    RelativePanel.RightOf="fontIconMedia"
+                    Text="{x:Bind Label}"
+                    TextWrapping="Wrap" />
+            </RelativePanel>
+        </DataTemplate>
+
+        <Style x:Key="FilesStyleTemplate" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="16,16,16,0" />
+            <Setter Property="Background" Value="{ThemeResource SystemChromeMediumColor}" />
+        </Style>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="FILES" />
+
+        <!--  relativepanel no fav icon/text  -->
+        <RelativePanel
+            x:Name="relativePanelNoFav"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.AlignVerticalCenterWithPanel="True"
+            Visibility="Collapsed">
+            <FontIcon
+                x:Name="fontIconNoFav"
+                Width="48"
+                Height="48"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="48"
+                Glyph="&#xE1CF;"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                RelativePanel.AlignVerticalCenterWithPanel="True" />
+            <TextBlock
+                x:Name="textBlockNoFavRemote"
+                Margin="16,16,16,0"
+                RelativePanel.Below="fontIconNoFav"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                You have no favorite remote
+                <LineBreak />
+                <LineBreak />
+                Please go to the
+                <Bold>Configured Remotes Page</Bold>
+                and set one as your favorite
+            </TextBlock>
+        </RelativePanel>
+
+        <Pivot RelativePanel.Below="pageHeader">
+
+            <PivotItem Margin="0" Header="Video">
+                <RelativePanel>
+                    <RelativePanel
+                        x:Name="relativePanelNoVideo"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Visibility="Collapsed">
+                        <FontIcon
+                            x:Name="fontIconNoVideo"
+                            Width="48"
+                            Height="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Glyph="&#xE8BD;"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <TextBlock
+                            x:Name="textBlockNoVideo"
+                            Margin="16,16,16,0"
+                            RelativePanel.Below="fontIconNoVideo"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            You do not have any Video in this list
+                        </TextBlock>
+                    </RelativePanel>
+
+                    <ListView
+                        x:Name="listViewVideo"
+                        IsItemClickEnabled="True"
+                        ItemClick="listViewVideo_ItemClick"
+                        ItemContainerStyle="{StaticResource FilesStyleTemplate}"
+                        ItemTemplate="{StaticResource FileDataTemplate}"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" />
+                </RelativePanel>
+            </PivotItem>
+
+            <PivotItem Margin="0" Header="Music">
+                <RelativePanel>
+                    <RelativePanel
+                        x:Name="relativePanelNoMusic"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Visibility="Collapsed">
+                        <FontIcon
+                            x:Name="fontIconNoMusic"
+                            Width="48"
+                            Height="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Glyph="&#xE8BD;"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <TextBlock
+                            x:Name="textBlockNoMusic"
+                            Margin="16,16,16,0"
+                            RelativePanel.Below="fontIconNoMusic"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            You do not have any Music in this list
+                        </TextBlock>
+                    </RelativePanel>
+
+                    <ListView
+                        x:Name="listViewMusic"
+                        IsItemClickEnabled="True"
+                        ItemClick="listViewMusic_ItemClick"
+                        ItemContainerStyle="{StaticResource FilesStyleTemplate}"
+                        ItemTemplate="{StaticResource FileDataTemplate}"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" />
+                </RelativePanel>
+            </PivotItem>
+
+            <PivotItem Margin="0" Header="Pictures">
+                <RelativePanel>
+                    <RelativePanel
+                        x:Name="relativePanelNoPictures"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Visibility="Collapsed">
+                        <FontIcon
+                            x:Name="fontIconNoPictures"
+                            Width="48"
+                            Height="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="48"
+                            Glyph="&#xE8BD;"
+                            RelativePanel.AlignHorizontalCenterWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True" />
+                        <TextBlock
+                            x:Name="textBlockNoPictures"
+                            Margin="16,16,16,0"
+                            RelativePanel.Below="fontIconNoPictures"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            You do not have any Pictures in this list
+                        </TextBlock>
+                    </RelativePanel>
+
+                    <ListView
+                        x:Name="listViewPictures"
+                        IsItemClickEnabled="True"
+                        ItemClick="listViewPictures_ItemClick"
+                        ItemContainerStyle="{StaticResource FilesStyleTemplate}"
+                        ItemTemplate="{StaticResource FileDataTemplate}"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" />
+                </RelativePanel>
+            </PivotItem>
+        </Pivot>
+    </RelativePanel>
+</Page>

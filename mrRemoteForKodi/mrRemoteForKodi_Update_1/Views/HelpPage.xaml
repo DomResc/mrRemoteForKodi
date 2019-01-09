@@ -1,0 +1,83 @@
+﻿<Page x:Class="mrRemoteForKodi_Update_1.Views.HelpPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="pageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="HELP" />
+
+        <ScrollViewer RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Below="pageHeader"
+                      VerticalScrollBarVisibility="Auto">
+            
+            <TextBlock x:Name="textBlockHelpPageDescription"
+                       Margin="16,16,16,0"
+                       TextWrapping="Wrap">
+                <Bold Foreground="{ThemeResource SystemAccentColor}">How-To configure Kodi/XBMC</Bold>
+                <LineBreak />
+                <LineBreak />
+                In Kodi/XBMC:
+                <LineBreak />
+                1. Go to
+                <Bold>System-&gt;Settings-&gt;Services-&gt;Web server</Bold>
+                and enable
+                <Bold>Allow remote control via HTTP</Bold>
+                <LineBreak />
+                2. Take note of
+                <Bold>Port, Username, Password</Bold>
+                because you have to put them in mrRemote, if autoconfiguration fail.
+                <LineBreak />
+                3. Go to
+                <Bold>System-&gt;Settings-&gt;Services-&gt;Remote control</Bold>
+                and enable
+                <Bold>Allow remote control by programs on this sistem</Bold>
+                and
+                <Bold>Allow remote control by programs on other systems</Bold>
+                <LineBreak />
+                <LineBreak />
+                <Bold Foreground="{ThemeResource SystemAccentColor}">How-To enable automatic configuration (Zeroconf)</Bold>
+                <LineBreak />
+                <LineBreak />
+                Install Zeroconf:
+                <LineBreak />
+                1. Windows, you need Apple's Bonjour. If you have Itunes, you have it already installed. Otherwise install it from
+                <Hyperlink NavigateUri="https://support.apple.com/kb/DL999">here</Hyperlink>
+                <LineBreak />
+                2. Linux, you need to install avahi
+                <LineBreak />
+                <LineBreak />
+                Enable Zeroconf in Kodi/XBMC:
+                <LineBreak />
+                1. Go to
+                <Bold>System-&gt;Settings-&gt;Services-&gt;Zeroconf</Bold>
+                and enable
+                <Bold>Announce services to other systems</Bold>
+                <LineBreak />
+                <LineBreak />
+                <Bold Foreground="{ThemeResource SystemAccentColor}">Get Kodi/XBMC network information</Bold>
+                <LineBreak />
+                <LineBreak />
+                If mrRemote isn't able to automatically find your mediacenter, you have to insert manually network information.
+                <LineBreak />
+                To get this information in Kodi/XBMC:
+                <LineBreak />
+                1. Go to
+                <Bold>System-&gt;System info</Bold>
+                and take note of the
+                <Bold>IP address</Bold>
+                <LineBreak />
+            </TextBlock>
+        </ScrollViewer>
+
+    </RelativePanel>
+</Page>

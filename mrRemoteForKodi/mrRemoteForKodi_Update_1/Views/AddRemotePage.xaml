@@ -1,0 +1,183 @@
+﻿<Page x:Class="mrRemoteForKodi_Update_1.Views.AddRemotePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="pageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="CONFIGURE A REMOTE" />
+
+        <ScrollViewer RelativePanel.Above="buttonSearch"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Below="pageHeader"
+                      VerticalScrollBarVisibility="Auto">
+            <RelativePanel>
+                <TextBlock x:Name="textBlockAddRemoteDescription"
+                           Margin="16,16,16,0"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True"
+                           TextWrapping="Wrap">
+                    Make sure that your
+                    Kodi / XBMC
+                    <Bold>is running</Bold>
+                    and it is
+                    <Bold>configured correctly</Bold>
+                    click
+                    <Hyperlink x:Name="hyperlinkHelp" Click="hyperlinkHelp_Click">
+                        here for help
+                    </Hyperlink>
+                    .
+                    <LineBreak />
+                    <LineBreak />
+                    Insert your Kodi/XBMC configuration
+                    <Bold>below</Bold>
+                    , or use the
+                    <Bold>Search</Bold>
+                    button to automatically search for configured Kodi/Xbmc.
+                </TextBlock>
+
+                <TextBox x:Name="textBoxRemoteName"
+                         Width="200"
+                         Margin="16,16,16,0"
+                         PlaceholderText="Name of your Remote"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="textBlockAddRemoteDescription"
+                         TextWrapping="Wrap" />
+
+                <TextBox x:Name="textBoxRemoteHost"
+                         Width="200"
+                         Margin="16,16,0,0"
+                         PlaceholderText="IP address/Hostname"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="textBoxRemoteName"
+                         TextWrapping="Wrap" />
+
+                <TextBox x:Name="textBoxRemotePort"
+                         Width="50"
+                         Margin="16,0"
+                         PlaceholderText="Port"
+                         RelativePanel.AlignBottomWith="textBoxRemoteHost"
+                         RelativePanel.RightOf="textBoxRemoteHost"
+                         TextWrapping="Wrap" />
+
+                <TextBox x:Name="textBoxRemoteUser"
+                         Width="200"
+                         Margin="16,16,16,0"
+                         Header="Security"
+                         PlaceholderText="Username"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="textBoxRemoteHost"
+                         TextWrapping="Wrap" />
+
+                <PasswordBox x:Name="passwordBoxRemotePass"
+                             Width="200"
+                             Margin="16,16,16,0"
+                             PlaceholderText="Password"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.Below="textBoxRemoteUser" />
+
+                <TextBox x:Name="textBoxRemoteWolMac"
+                         Width="200"
+                         Margin="16,16,0,0"
+                         Header="Wake On Lan:"
+                         PlaceholderText="e.g. 01:23:45:67:89:ab"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="passwordBoxRemotePass"
+                         TextWrapping="Wrap" />
+
+                <TextBox x:Name="textBoxRemoteWolSubnet"
+                         Width="200"
+                         Margin="16,16,0,0"
+                         PlaceholderText="e.g. 255.255.255.255"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="textBoxRemoteWolMac"
+                         TextWrapping="Wrap" />
+
+                <TextBox x:Name="textBoxRemoteWolPort"
+                         Width="200"
+                         Margin="16,16,0,0"
+                         PlaceholderText="e.g. 9"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.Below="textBoxRemoteWolSubnet"
+                         TextWrapping="Wrap" />
+
+                <ToggleSwitch x:Name="toggleSwitchFav"
+                              Margin="16,16,16,0"
+                              Header="Set this remote as your favourite"
+                              OffContent="No"
+                              OnContent="Yes"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.Below="textBoxRemoteWolPort" />
+
+                <TextBlock x:Name="textBlockError"
+                           Margin="16,16,16,0"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.Below="toggleSwitchFav"
+                           TextWrapping="Wrap" />
+
+                <ProgressRing x:Name="progressRingSearchAndTest"
+                              Width="32"
+                              Height="32"
+                              Margin="16,16,0,0"
+                              IsActive="False"
+                              RelativePanel.AlignVerticalCenterWith="textBlockError" />
+
+            </RelativePanel>
+        </ScrollViewer>
+
+        <Button x:Name="buttonSearch"
+                Width="128"
+                Height="32"
+                Margin="16,16,0,16"
+                Click="buttonSearch_Click"
+                Content="Search"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True" />
+
+        <Button x:Name="buttonTest"
+                Width="128"
+                Height="32"
+                Margin="0,16,16,16"
+                Click="buttonTest_Click"
+                Content="Test"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True" />
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

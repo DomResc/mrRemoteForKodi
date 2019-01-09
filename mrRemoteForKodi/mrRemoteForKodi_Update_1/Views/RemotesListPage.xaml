@@ -1,0 +1,131 @@
+﻿<Page x:Class="mrRemoteForKodi_Update_1.Views.RemotesListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:converters="using:Template10.Converters"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:data="using:mrRemoteForKodi_Update_1.Models"
+      xmlns:local="using:mrRemoteForKodi_Update_1.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      Loaded="Page_Loaded"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ValueWhenConverter x:Key="VisibleWhenTrueConverter">
+            <converters:ValueWhenConverter.When>
+                <x:Boolean>True</x:Boolean>
+            </converters:ValueWhenConverter.When>
+            <converters:ValueWhenConverter.Value>
+                <Visibility>Visible</Visibility>
+            </converters:ValueWhenConverter.Value>
+            <converters:ValueWhenConverter.Otherwise>
+                <Visibility>Collapsed</Visibility>
+            </converters:ValueWhenConverter.Otherwise>
+        </converters:ValueWhenConverter>
+
+        <DataTemplate x:Key="RemoteDataTemplate" x:DataType="data:Remote">
+            <RelativePanel Margin="16">
+                <Canvas x:Name="canvasKodiLogo"
+                        Width="24"
+                        Height="24"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True">
+                    <Path Data="M12.03,1C11.82,1 11.6,1.11 11.41,1.31C10.56,2.16 9.72,3 8.88,3.84C8.66,4.06 8.6,4.18 8.38,4.38C8.09,4.62 7.96,4.91 7.97,5.28C8,6.57 8,7.84 8,9.13C8,10.46 8,11.82 8,13.16C8,13.26 8,13.34 8.03,13.44C8.11,13.75 8.31,13.82 8.53,13.59C9.73,12.39 10.8,11.3 12,10.09C13.36,8.73 14.73,7.37 16.09,6C16.5,5.6 16.5,5.15 16.09,4.75C14.94,3.6 13.77,2.47 12.63,1.31C12.43,1.11 12.24,1 12.03,1M18.66,7.66C18.45,7.66 18.25,7.75 18.06,7.94C16.91,9.1 15.75,10.24 14.59,11.41C14.2,11.8 14.2,12.23 14.59,12.63C15.74,13.78 16.88,14.94 18.03,16.09C18.43,16.5 18.85,16.5 19.25,16.09C20.36,15 21.5,13.87 22.59,12.75C22.76,12.58 22.93,12.42 23,12.19V11.88C22.93,11.64 22.76,11.5 22.59,11.31C21.47,10.19 20.37,9.06 19.25,7.94C19.06,7.75 18.86,7.66 18.66,7.66M4.78,8.09C4.65,8.04 4.58,8.14 4.5,8.22C3.35,9.39 2.34,10.43 1.19,11.59C0.93,11.86 0.93,12.24 1.19,12.5C1.81,13.13 2.44,13.75 3.06,14.38C3.6,14.92 4,15.33 4.56,15.88C4.72,16.03 4.86,16 4.94,15.81C5,15.71 5,15.58 5,15.47C5,14.29 5,13.37 5,12.19C5,11 5,9.81 5,8.63C5,8.55 5,8.45 4.97,8.38C4.95,8.25 4.9,8.14 4.78,8.09M12.09,14.25C11.89,14.25 11.66,14.34 11.47,14.53C10.32,15.69 9.18,16.87 8.03,18.03C7.63,18.43 7.63,18.85 8.03,19.25C9.14,20.37 10.26,21.47 11.38,22.59C11.54,22.76 11.71,22.93 11.94,23H12.22C12.44,22.94 12.62,22.79 12.78,22.63C13.9,21.5 15.03,20.38 16.16,19.25C16.55,18.85 16.5,18.4 16.13,18C14.97,16.84 13.84,15.69 12.69,14.53C12.5,14.34 12.3,14.25 12.09,14.25Z" Fill="{ThemeResource SystemAccentColor}" />
+                </Canvas>
+                <TextBlock x:Name="textBlockName"
+                           Margin="16,0,0,0"
+                           FontWeight="Bold"
+                           RelativePanel.RightOf="canvasKodiLogo"
+                           Text="{x:Bind Name}" />
+                <TextBlock x:Name="textBlockHost"
+                           Margin="16,0,0,0"
+                           FontSize="13"
+                           Foreground="Gray"
+                           RelativePanel.Below="textBlockName"
+                           RelativePanel.RightOf="canvasKodiLogo"
+                           Text="{x:Bind Host}" />
+                <SymbolIcon x:Name="symbolIconFavorite"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignVerticalCenterWithPanel="True"
+                            Symbol="Favorite"
+                            Visibility="{x:Bind Fav, Converter={StaticResource VisibleWhenTrueConverter}}" />
+            </RelativePanel>
+        </DataTemplate>
+
+        <Style x:Key="RemoteStyleTemplate" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="16,16,16,0" />
+            <Setter Property="Background" Value="{ThemeResource SystemChromeMediumColor}" />
+        </Style>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="pageHeader"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="CONFIGURED REMOTES">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton x:Name="appBarButtonAdd"
+                              Click="appBarButtonAdd_Click"
+                              Icon="Add"
+                              Label="Add a remote" />
+                <AppBarButton x:Name="appBarButtonFavorite"
+                              Click="appBarButtonFavorite_Click"
+                              Icon="Favorite"
+                              Label="Make favorite selected remote" />
+                <AppBarButton x:Name="appBarButtonEdit"
+                              Click="appBarButtonEdit_Click"
+                              Icon="Edit"
+                              Label="Edit selected remote" />
+                <AppBarButton x:Name="appBarButtonDelete"
+                              Click="appBarButtonDelete_Click"
+                              Icon="Delete"
+                              Label="Delete selected remote" />
+                <AppBarButton x:Name="appBarButtonWol"
+                              Click="appBarButtonWol_Click"
+                              Label="Wake on lan selected remote">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE945;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <RelativePanel x:Name="relativePanelNoRemote"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignVerticalCenterWithPanel="True">
+            <Viewbox x:Name="fontIconNoRemote"
+                     Width="72"
+                     Height="72"
+                     RelativePanel.AlignHorizontalCenterWithPanel="True"
+                     RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Canvas Width="16" Height="32">
+                    <PathIcon Data="M8.0000074,25.5C8.8280065,25.5 9.5000074,26.172 9.5000074,27 9.5000074,27.828001 8.8280065,28.5 8.0000074,28.5 7.1720069,28.5 6.5000069,27.828001 6.5000069,27 6.5000069,26.172 7.1720069,25.5 8.0000074,25.5z M11.000007,20C11.552007,20 12.000007,20.448 12.000007,21 12.000007,21.552001 11.552007,22 11.000007,22 10.448007,22 10.000007,21.552001 10.000007,21 10.000007,20.448 10.448007,20 11.000007,20z M8.0000074,20C8.5520065,20 9.0000074,20.448 9.0000074,21 9.0000074,21.552001 8.5520065,22 8.0000074,22 7.4480069,22 7.0000069,21.552001 7.0000069,21 7.0000069,20.448 7.4480069,20 8.0000074,20z M5.0000069,20C5.552007,20 6.0000069,20.448 6.0000069,21 6.0000069,21.552001 5.552007,22 5.0000069,22 4.4480069,22 4.0000069,21.552001 4.0000069,21 4.0000069,20.448 4.4480069,20 5.0000069,20z M11.000007,16C11.552007,16 12.000007,16.448 12.000007,17 12.000007,17.552001 11.552007,18 11.000007,18 10.448007,18 10.000007,17.552001 10.000007,17 10.000007,16.448 10.448007,16 11.000007,16z M8.0000074,16C8.5520065,16 9.0000074,16.448 9.0000074,17 9.0000074,17.552001 8.5520065,18 8.0000074,18 7.4480069,18 7.0000069,17.552001 7.0000069,17 7.0000069,16.448 7.4480069,16 8.0000074,16z M5.0000069,16C5.552007,16 6.0000069,16.448 6.0000069,17 6.0000069,17.552001 5.552007,18 5.0000069,18 4.4480069,18 4.0000069,17.552001 4.0000069,17 4.0000069,16.448 4.4480069,16 5.0000069,16z M11.000007,12C11.552007,12 12.000007,12.448 12.000007,13 12.000007,13.552 11.552007,14 11.000007,14 10.448007,14 10.000007,13.552 10.000007,13 10.000007,12.448 10.448007,12 11.000007,12z M8.0000074,12C8.5520065,12 9.0000074,12.448 9.0000074,13 9.0000074,13.552 8.5520065,14 8.0000074,14 7.4480069,14 7.0000069,13.552 7.0000069,13 7.0000069,12.448 7.4480069,12 8.0000074,12z M5.0000069,12C5.552007,12 6.0000069,12.448 6.0000069,13 6.0000069,13.552 5.552007,14 5.0000069,14 4.4480069,14 4.0000069,13.552 4.0000069,13 4.0000069,12.448 4.4480069,12 5.0000069,12z M5.9990022,9.0000002L9.9990022,9.0000002C10.275002,9.0000002 10.499002,9.2240002 10.499002,9.5 10.499002,9.776 10.275002,10 9.9990022,10L5.9990022,10C5.7230022,10 5.4990022,9.776 5.4990022,9.5 5.4990022,9.2240002 5.7230022,9.0000002 5.9990022,9.0000002z M2.9999996,8.0000108C2.4490049,8.000011,1.9999998,8.448009,1.9999998,9.0000112L1.9999998,29.000011C1.9999998,29.552013,2.4490049,30.000011,2.9999996,30.000011L13,30.000011C13.550995,30.000011,14,29.552013,14,29.000011L14,9.0000112C14,8.448009,13.550995,8.000011,13,8.0000108z M2.9999996,6.0000111L13,6.0000111C14.654022,6.000011,16,7.3460193,16,9.0000112L16,29.000011C16,30.654003,14.654022,32.000011,13,32.000011L2.9999996,32.000011C1.3460081,32.000011,-2.1142202E-07,30.654003,2.8421709E-14,29.000011L2.8421709E-14,9.0000112C-2.1142202E-07,7.3460193,1.3460081,6.000011,2.9999996,6.0000111z M8.0239008,3C9.0949505,3.0000002 10.095996,3.388 10.84403,4.0910001 11.04504,4.2800001 11.05404,4.5970001 10.865031,4.7980001 10.675023,4.9990001 10.359008,5.0080001 10.157999,4.8190005 9.0289476,3.7570002 6.9558523,3.7740002 5.8508017,4.8570006 5.7527974,4.9520001 5.6267913,5.0000001 5.5007856,5.0000002 5.3707798,5.0000001 5.2417739,4.9500002 5.1437695,4.8500001 4.9507606,4.6520001 4.9537609,4.3360001 5.1507695,4.1430001 5.8928035,3.4170001 6.9388516,3.0000002 8.0239008,3z M7.9571593,0C9.7721708,0 11.513181,0.76500034 12.859189,2.1520002 13.05119,2.3510001 13.04619,2.6670001 12.848189,2.8590002 12.751189,2.9530001 12.625188,3.0000002 12.500187,3 12.370187,3.0000002 12.239185,2.9490001 12.141185,2.848 10.985178,1.6560001 9.5001686,1 7.9571593,1 6.4531501,1 4.9951413,1.6280003 3.8531339,2.7670002 3.6581331,2.9620001 3.3411312,2.9620001 3.1461296,2.7670002 2.9511287,2.5710001 2.9511287,2.2540002 3.14713,2.0600002 4.4781382,0.73099995 6.1861484,0 7.9571593,0z" />
+                </Canvas>
+            </Viewbox>
+            <TextBlock x:Name="textBlockNoRemote"
+                       Margin="16,16,16,0"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.Below="fontIconNoRemote"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap">
+                You have no configured remote
+                <LineBreak />
+                <LineBreak />
+                Please click on the
+                <Bold>add button '+'</Bold>
+                on the top bar
+            </TextBlock>
+        </RelativePanel>
+
+        <ListView x:Name="listViewRemotes"
+                  ItemContainerStyle="{StaticResource RemoteStyleTemplate}"
+                  ItemTemplate="{StaticResource RemoteDataTemplate}"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.Below="pageHeader" />
+
+    </RelativePanel>
+</Page>
